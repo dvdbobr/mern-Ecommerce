@@ -6,6 +6,7 @@ const app = express();
 const path = require('path');
 const userRouter = require('./routes/users.route');
 const productRouter = require('./routes/products.route');
+const categoryRouter = require('./routes/category.route');
 const port = 8000;
 
 app.use(express.json());
@@ -17,6 +18,7 @@ app.get('/api/getUser', (req, res) => {
 })
 app.use('/api/users', userRouter)
 app.use('/api/products', productRouter)
+app.use('/api/category', categoryRouter)
 const uri = process.env.MONGODB_URL
 mongoose.connect(uri, {
   useNewUrlParser: true,

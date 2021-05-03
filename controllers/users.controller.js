@@ -3,8 +3,9 @@ const usersModel = require('../models/users.model');
 
 const getUsers = async (req, res) => {
     try {
-        const users = await usersModel.find({})
-        return res.send(users);
+        const users = await usersModel.find({}).select('-password -tokens')
+        const publicUsers = users.map(user => { return user.getPublicProfile() })
+        return res.send({ users: users });
     }
     catch (err) {
         return res.send(`error:${err}`);
@@ -22,7 +23,7 @@ const register = async (req, res) => {
         })
         await user.save()
         const token = await user.generateAuthToken()
-        return res.json({ "created successfully": { user, token } })
+        return res.json({ "created successfully": { user }, token })
     }
     catch (err) {
         return res.status(400).send(`error:${err}`)
@@ -33,7 +34,7 @@ const login = async (req, res) => {
     try {
         const user = await usersModel.findByCredentials(email, password)
         const token = await user.generateAuthToken()
-        res.send({ msg: 'login successful', user: user.getPublicProfile() })
+        res.send({ msg: 'login successful', user: user.getPublicProfile(), token })
     }
     catch (err) {
         console.log(err)
