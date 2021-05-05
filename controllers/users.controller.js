@@ -26,7 +26,7 @@ const register = async (req, res) => {
         return res.json({ "created successfully": { user }, token })
     }
     catch (err) {
-        return res.status(400).send(`error:${err}`)
+        return res.status(400).send(err.message)
     }
 }
 const login = async (req, res) => {
@@ -38,7 +38,7 @@ const login = async (req, res) => {
     }
     catch (err) {
         console.log(err)
-        res.status(400).send(`error:${err}`)
+        res.status(400).send(err.message)
     }
 }
 const logout = async (req, res) => {

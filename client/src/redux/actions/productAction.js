@@ -1,7 +1,11 @@
 import Axios from 'axios'
-import { PRODUCT_LIST_REQUEST, PRODUCT_LIST_SUCCESS, PRODUCT_LIST_FAILURE } from '../constants/productConstants'
+import {
+    PRODUCT_LIST_REQUEST,
+    PRODUCT_LIST_SUCCESS,
+    PRODUCT_LIST_FAILURE,
+    SELECTED_PRODUCT,
+} from '../constants/productConstants'
 export const listProducts = () => async (dispatch) => {
-    console.log("works")
     dispatch({
         type: PRODUCT_LIST_REQUEST
     })
@@ -13,4 +17,10 @@ export const listProducts = () => async (dispatch) => {
     catch (err) {
         dispatch({ type: PRODUCT_LIST_FAILURE, payload: err.message })
     }
+}
+export const itemDetails = (selectedItem) => (dispatch) => {
+    dispatch({
+        type: SELECTED_PRODUCT,
+        payload: selectedItem
+    })
 }

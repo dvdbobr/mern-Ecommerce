@@ -52,12 +52,12 @@ userSchema.methods.getPublicProfile = function () {
 userSchema.statics.findByCredentials = async (email, password) => {
     const user = await usermodel.findOne({ email })
     if (!user) {
-        throw new Error("unable to login")
+        throw new Error("no such user")
     }
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-        throw new Error("unable to login")
+        throw new Error("email or password mismatch")
     }
     return user
 }

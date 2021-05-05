@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
+//import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
-import { listProducts } from '../actions/productAction'
+import { listProducts } from '../redux/actions/productAction'
+import Navbar from './navbar.component'
+import Card from './card.component'
 function Products() {
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productsList)
@@ -16,15 +18,27 @@ function Products() {
     }, [dispatch])
     return (
         <div>
-            {
-                // products ? products.map(product => {
-                //     return <div>{product.title}</div>
-                // }) : ''
-                loading ? <h2>loading...</h2>
-                    : products ? products.map(product => {
-                        return <h2>{product.title}</h2>
-                    }) : ''
-            }
+            <Navbar />
+            <div className="main">
+                {
+                    loading ? <h2>loading...</h2>
+                        : error ? <h2>{error}</h2> :
+                            <div className="cardContainer">
+                                {
+                                    products ? products.map(product => {
+                                        return <Card
+                                            id={product.productID}
+                                            img={product.url}
+                                            title={product.title}
+                                            category={product.category}
+                                            description={product.description}
+                                            price={product.price}
+                                        />
+                                    }) : ''
+                                }
+                            </div>
+                }
+            </div>
         </div>
     )
 }
