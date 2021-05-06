@@ -1,23 +1,24 @@
-import React, { useEffect } from 'react'
-//import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import cookies from 'js-cookie'
 import { useSelector, useDispatch } from 'react-redux'
-import { listProducts } from '../redux/actions/productAction'
-import Navbar from './navbar.component'
-import Card from './card.component'
-function Products() {
+import { listProducts } from '../../redux/actions/productAction'
+import Navbar from '../../components/navbar/navbar.component'
+import Card from '../../components/card/card.component'
+function Home() {
     const dispatch = useDispatch()
+    // const [token, setToken] = useState('')
     const productList = useSelector(state => state.productsList)
     const { loading, error, products } = productList
+
     useEffect(() => {
-        // const getProducts =async() =>{
-        //     const data = await axios.get('/api/products')
-        //     console.log(data);
-        // }
-        // getProducts()
+        const cookie = cookies.get('ut')
+        if (cookie)
+            console.log(cookie);
         dispatch(listProducts())
     }, [dispatch])
     return (
-        <div>
+        <>
             <Navbar />
             <div className="main">
                 {
@@ -39,9 +40,9 @@ function Products() {
                             </div>
                 }
             </div>
-        </div>
+        </>
     )
 }
 
-export default Products
+export default Home
 

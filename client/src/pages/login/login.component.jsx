@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import Navbar from './navbar.component'
+import Navbar from '../../components/navbar/navbar.component'
+
 function Login() {
+    // const [token, setToken] = useState('')
     const [user, setUser] = useState({
         email: '', password: ''
     })
     const onChangeHandler = (e) => {
         const { name, value } = e.target
-        setUser({ user, [name]: value })
+        setUser({ ...user, [name]: value })
     }
     const loginUser = async (e) => {
         e.preventDefault()
         try {
             await axios.post('/api/users/login', {
-                "email":`${user.email}`,
-                "password":`${user.password}`
+                "email": `${user.email}`,
+                "password": `${user.password}`
             })
             localStorage.setItem('login', true)
-
             window.location.href = '/'
         }
         catch (err) {

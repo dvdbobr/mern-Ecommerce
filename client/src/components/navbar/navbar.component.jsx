@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../Images/logo3.png'
+import logo from '../../Images/logo3.png'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaTimes, FaShoppingCart } from 'react-icons/fa'
 function Navbar() {

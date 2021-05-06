@@ -15,15 +15,19 @@ const getUsers = async (req, res) => {
 const register = async (req, res) => {
     const { firstName, lastName, email, password } = req.body
     try {
-        const user = new usersModel({
+        const user = await usersModel.findOne({ email })
+        if (user)
+            return res.status(400).json({ message: 'email already exists' })
+        const newUser = new usersModel({
             firstName: firstName,
             lastName: lastName,
             email: email,
             password: password
         })
-        await user.save()
-        const token = await user.generateAuthToken()
-        return res.json({ "created successfully": { user }, token })
+
+        await newUser.save()
+        const token = await newUser.generateAuthToken()
+        return res.status(200).json({ "created successfully": { newUser }, token })
     }
     catch (err) {
         return res.status(400).send(err.message)
@@ -34,6 +38,7 @@ const login = async (req, res) => {
     try {
         const user = await usersModel.findByCredentials(email, password)
         const token = await user.generateAuthToken()
+        res.cookie("ut", token)
         res.send({ msg: 'login successful', user: user.getPublicProfile(), token })
     }
     catch (err) {

@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser')
 const app = express();
 const path = require('path');
 const userRouter = require('./routes/users.route');
@@ -9,6 +10,7 @@ const productRouter = require('./routes/products.route');
 const categoryRouter = require('./routes/category.route');
 const port = 8000;
 
+// app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 // app.use('/api/users', userRouter)

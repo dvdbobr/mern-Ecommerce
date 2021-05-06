@@ -1,7 +1,6 @@
 .productDetailContainer {
     margin-top:2rem ;
     width: 100vw;
-    height: 100vh;
 }
 
 .productDetailInnerContainer {
@@ -29,4 +28,11 @@
 .productDetails button:hover{
     cursor: pointer;
     opacity: 0.8;
+}
+.detailsContainer{
+    height:500px
+}
+.relatedTitle{
+    margin-left: 20vw;
+    font-size:3rem;
 }

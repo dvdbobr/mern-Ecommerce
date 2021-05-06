@@ -7,10 +7,10 @@ body {
 }
 
 .main {
-    padding-top: 68px;
+    padding-top: 30px;
     max-width: 1250px;
     min-width: 100vh;
-    height: 120vh;
+    height: 105vh;
     margin: 0 auto;
     border: 2px solid;
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
