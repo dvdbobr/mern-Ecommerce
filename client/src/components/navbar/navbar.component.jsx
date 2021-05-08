@@ -3,11 +3,19 @@ import { Link } from 'react-router-dom'
 import logo from '../../Images/logo3.png'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaTimes, FaShoppingCart } from 'react-icons/fa'
+import { TiArrowSortedDown } from 'react-icons/ti'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../../redux/actions/userActions'
 function Navbar() {
     const [menuHandler, setMenuHandler] = useState(true)
-
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+    const dispatch = useDispatch()
     const changeMenuHandler = () => {
         setMenuHandler(!menuHandler)
+    }
+    const logoutHandler = () => {
+        dispatch(logout())
     }
     return (
         <div className="navbar">
@@ -21,8 +29,21 @@ function Navbar() {
             </div>
             <div className="navbar-right">
                 <div><Link to={"/"}>Home</Link> </div>
-                <div><Link to={"/login"}>Sign In</Link></div>
-                <div><Link to={"/cart"}><FaShoppingCart /> </Link></div>
+                <>
+                    {
+                        userInfo ?
+                            <div className="navbarLogin">
+                                <Link to={"/"}>{userInfo.user.firstName}</Link>
+                                <div className="logoutArrow"><TiArrowSortedDown size={23} color={"black"} /></div>
+                                <div className="loggedIn">
+                                    <Link to={"#logout"} onClick={logoutHandler}>Logout </Link>
+                                </div>
+                            </div>
+                            :
+                            <Link to={"/login"}>Login</Link>
+                    }
+                </>
+                <div className="navbarCart"><Link to={"/cart"}><FaShoppingCart /> </Link></div>
             </div>
         </div>
     )

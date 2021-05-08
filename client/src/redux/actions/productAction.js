@@ -1,16 +1,19 @@
-import Axios from 'axios'
+import axios from 'axios'
 import {
     PRODUCT_LIST_REQUEST,
     PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAILURE,
     SELECTED_PRODUCT,
+    PRODUCT_DETAILS_REQUEST,
+    PRODUCT_DETAILS_SUCCESS,
+    PRODUCT_DETAILS_FAILURE
 } from '../constants/productConstants'
 export const listProducts = () => async (dispatch) => {
     dispatch({
         type: PRODUCT_LIST_REQUEST
     })
     try {
-        const data = await Axios.get('/api/products')
+        const data = await axios.get('/api/products')
         console.log(data)
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: { data: data.data } })
     }
@@ -23,4 +26,19 @@ export const itemDetails = (selectedItem) => (dispatch) => {
         type: SELECTED_PRODUCT,
         payload: selectedItem
     })
+}
+export const productDetails = (selectedProductID) => async (dispatch) => {
+    dispatch({ type: PRODUCT_DETAILS_REQUEST, payload: selectedProductID })
+    try {
+        const { data } = await axios.get(`/api/products/${selectedProductID}`)
+        dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data })
+    }
+    catch (err) {
+        dispatch({
+            type: PRODUCT_DETAILS_FAILURE,
+            payload: err.response && err.response.data.message ?
+                err.response.data.message 
+                : err.message,
+        })
+    }
 }

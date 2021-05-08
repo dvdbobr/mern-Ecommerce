@@ -42,8 +42,8 @@ const login = async (req, res) => {
         res.send({ msg: 'login successful', user: user.getPublicProfile(), token })
     }
     catch (err) {
-        console.log(err)
-        res.status(400).send(err.message)
+        console.log(err.message)
+        return res.status(400).send(err.message)
     }
 }
 const logout = async (req, res) => {
@@ -56,7 +56,7 @@ const logout = async (req, res) => {
         res.send({ msg: 'you have successfully logged out' })
     }
     catch (err) {
-        res.status(500).send(err)
+        return res.status(400).send(err.message)
     }
 }
 const getMyUser = async (req, res) => {

@@ -1,5 +1,6 @@
 body {
     overflow-x: hidden;
+    background-color:#F5F5F5;
     /* color: #fff; */
     /* background-color: #333; */
     /* background-color: #93d84d */
@@ -10,7 +11,7 @@ body {
     padding-top: 30px;
     max-width: 1250px;
     min-width: 100vh;
-    height: 105vh;
+    height: 110vh;
     margin: 0 auto;
     border: 2px solid;
     /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */

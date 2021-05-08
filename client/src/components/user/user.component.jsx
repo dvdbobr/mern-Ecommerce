@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
-import logo from '../logo.svg';
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 
 function User() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
   // const [user, setUser] = useState(null)
 
   // const getUser = async () =>{
@@ -18,11 +19,24 @@ function User() {
   }
 
   useEffect(() => {
-    getUsers()
+    if (token) {
+      const getUserData = async () => {
+        try {
+          const data = await axios.get('/api/users/getMyUser/', {
+            headers: { 'Authorization': token }
+          })
+          console.log(data);
+        }
+        catch (err) {
+          alert(err.response.data)
+        }
+      }
+      getUserData()
+    }
   }, [])
   return (
     <div className="App">
-        {/* <p>
+      {/* <p>
           {`Hello ${user}`}
         </p> */}
     </div>

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import Navbar from '../../components/navbar/navbar.component'
-
+import {Link} from 'react-router-dom'
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 function Register() {
+    const [passwordShown, setPasswordShown] = useState(false);
     const [user, setUser] = useState({
         firstName: '', lastName: '', email: '', password: ''
     })
@@ -10,12 +12,15 @@ function Register() {
         const { name, value } = e.target
         setUser({ ...user, [name]: value })
     }
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(!passwordShown);
+    };
     const Register = async (e) => {
         e.preventDefault()
         try {
             await axios.post('/api/users/register', {
-                "firstName":`${user.firstName}`,
-                "lastName":`${user.lastName}`,
+                "firstName": `${user.firstName}`,
+                "lastName": `${user.lastName}`,
                 "email": `${user.email}`,
                 "password": `${user.password}`
             })
@@ -39,11 +44,15 @@ function Register() {
                             placeholder="Enter Last Name" value={user.lastName} onChange={onChangeHandler} />
                         <input type="email" name="email" required
                             placeholder="Enter Email" value={user.email} onChange={onChangeHandler} />
-                        <input type="password" name="password" required
-                            placeholder="Enter Password" value={user.password} onChange={onChangeHandler} />
+                        <div className="password">
+                            <input type={passwordShown ? "text" : "password"} name="password" required
+                                placeholder="Enter Password" value={user.password} onChange={onChangeHandler} />
+                            <span>{passwordShown ? <AiOutlineEyeInvisible onClick={togglePasswordVisiblity} /> : <AiOutlineEye onClick={togglePasswordVisiblity} />}</span>
+                        </div>
                         <div className="loginFunctions">
                             <button type="submit">Register</button>
                         </div>
+                        <span className="loginAndRegisterAccount">Already have an account? <Link to={'/login'}>Login</Link></span>
                     </div>
                 </form>
             </div>

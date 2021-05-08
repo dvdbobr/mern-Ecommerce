@@ -8,6 +8,7 @@ import './pages/home/home.css';
 import './components/card/card.css';
 import './pages/productDetails/productDetails.css';
 import './pages/login/login.css'
+import './components/spinner/spinner.css';
 import Home from './pages/home/home.component';
 import ProductDetails from './pages/productDetails/productDetails.component';
 import Login from './pages/login/login.component';

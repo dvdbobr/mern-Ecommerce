@@ -9,14 +9,21 @@
     height: 68px;
     z-index: 100;
 }
-.navbar-right,.navbar-left{
+
+.navbar-right, .navbar-left {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    width: 300px;
 }
+
 .navbar-right div {
     margin-right: 20px;
 }
-
+.navbarCart{
+    padding-top:10px;
+    padding-left: 25px;
+}
 .logo {
     width: 200px;
     height: 68px;
@@ -28,4 +35,38 @@
     height: 68px;
     object-fit: cover;
     padding-bottom: 7px;
+}
+
+.navbarLogin {
+    position: relative;
+    width: 110px;
+    
+}
+
+.navbarLogin:hover .loggedIn {
+    visibility: visible;
+}
+
+.loggedIn {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    background-color: rgb(216, 77, 77);
+    visibility: hidden;
+    right: -15px;
+    text-align: center;
+    font-size:2rem;
+    height: 50px;
+    width: 120px;
+    padding: 20px;
+}
+
+.loggedIn span:hover {
+    cursor: pointer;
+}
+.logoutArrow{
+    position:absolute;
+    right:0;
+    top: 10px;
+    /* padding-top: 12px; */
 }

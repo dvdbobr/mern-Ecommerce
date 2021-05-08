@@ -5,6 +5,8 @@ const productController = require('../controllers/products.controller');
 
 router.get('/', (req, res) => {
     productController.getProducts(req, res);
+}).get('/:id', (req, res) => {
+    productController.getProductById(req, res);
 }).post('/', (req, res) => {
     productController.createProduct(req, res);
 }).delete('/:id', (req, res) => {

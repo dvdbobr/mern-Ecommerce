@@ -1,17 +1,17 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
 import { itemDetails } from '../../redux/actions/productAction'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+//import { Link } from 'react-router-dom'
+// import {  useDispatch } from 'react-redux'
 function Card(props) {
     const history = useHistory();
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
     const onViewClick = () => {
-        dispatch(itemDetails(props))
+        // dispatch(itemDetails(props))
         history.push(`/details/${props.id}`)
     }
     const shortenDescription = (description) => {
-        return description.slice(0, 25)
+        return description.slice(0, 25)+"..."
     }
     return (
         <div className="card">
@@ -23,7 +23,7 @@ function Card(props) {
                     props.description.length <= 35 ? props.description : <>
                         {shortenDescription(props.description)}
                         <br />
-                        <span className="readMore" onClick={onViewClick}>Read More...</span>
+                        <span className="readMore" onClick={onViewClick}>Read More</span>
                     </>
                 }
 

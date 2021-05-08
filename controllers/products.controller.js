@@ -10,6 +10,19 @@ const getProducts = async (req, res) => {
         return res.send(`error:${err}`);
     }
 }
+const getProductById = async (req, res) => {
+    let id = req.params.id;
+    try {
+        let product = await productsModel.findOne({ "productID": id })
+        if(!product) {
+            return res.status(400).send('no such product')
+        }
+        return res.status(200).send(product)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
 const createProduct = async (req, res) => {
     try {
         const { productID, title, category, description, price, url } = req.body
@@ -37,7 +50,7 @@ const deleteProductById = async (req, res) => {
         res.send(product)
     }
     catch (err) {
-        res.send(err);
+        return res.status(500).json({ message: err.message })
     }
 }
 const updateProduct = async (req, res) => {
@@ -55,7 +68,8 @@ const updateProduct = async (req, res) => {
 }
 module.exports = {
     getProducts,
+    getProductById,
     createProduct,
     deleteProductById,
-    updateProduct
+    updateProduct,
 }
