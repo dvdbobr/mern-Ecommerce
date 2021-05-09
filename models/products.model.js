@@ -23,6 +23,10 @@ const productSchema = mongoose.Schema({
     url: {
         type: String,
     },
+    countInStock: {
+        type: Number,
+        default:0,
+    },
     checked: {
         type: Boolean,
         default: false,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useEffect } from 'react'
+//import axios from 'axios'
 import cookies from 'js-cookie'
 import { useSelector, useDispatch } from 'react-redux'
 import { listProducts } from '../../redux/actions/productAction'
@@ -20,7 +20,7 @@ function Home() {
             console.log(cookie);
         dispatch(listProducts())
         userInfo ? console.log(userInfo.user) : console.log("not logged in");;
-    }, [dispatch])
+    }, [dispatch, userInfo])
     return (
         <>
             <Navbar />

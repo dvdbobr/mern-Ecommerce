@@ -21,8 +21,21 @@
     margin-right: 20px;
 }
 .navbarCart{
+    position: relative;
     padding-top:10px;
-    padding-left: 25px;
+    /* padding-left: 25px; */
+}
+.cartCounter{
+    position:absolute;
+    background-color: #4dd8d8;
+    text-align: center;
+    font-weight: bold;
+    color: crimson;
+    border-radius:50%;
+    width:25px;
+    height: 25px;
+    top: 0px;
+    left: 26px;
 }
 .logo {
     width: 200px;

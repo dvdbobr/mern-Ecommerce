@@ -10,6 +10,8 @@ function Navbar() {
     const [menuHandler, setMenuHandler] = useState(true)
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
+    const cart = useSelector(state => state.cart)
+    const { cartItems } = cart
     const dispatch = useDispatch()
     const changeMenuHandler = () => {
         setMenuHandler(!menuHandler)
@@ -40,10 +42,14 @@ function Navbar() {
                                 </div>
                             </div>
                             :
-                            <Link to={"/login"}>Login</Link>
+                            <div>
+                                <Link to={"/login"}>Login</Link>
+                            </div>
                     }
                 </>
-                <div className="navbarCart"><Link to={"/cart"}><FaShoppingCart /> </Link></div>
+                <div className="navbarCart"><Link to={"/cart"}><FaShoppingCart /> </Link>
+                    <span className="cartCounter">{cartItems.length}</span>
+                </div>
             </div>
         </div>
     )

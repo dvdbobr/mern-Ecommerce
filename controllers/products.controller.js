@@ -2,19 +2,22 @@ const productsModel = require('../models/products.model');
 
 
 const getProducts = async (req, res) => {
+    // const pageSize = 2;
+    // const page = Number(req.query.pageNumber)||1
     try {
+        // const count= await productsModel.count({})
         const products = await productsModel.find({})
         return res.send(products);
     }
     catch (err) {
-        return res.send(`error:${err}`);
+        return res.status(500).json({ message: err.message })
     }
 }
 const getProductById = async (req, res) => {
     let id = req.params.id;
     try {
         let product = await productsModel.findOne({ "productID": id })
-        if(!product) {
+        if (!product) {
             return res.status(400).send('no such product')
         }
         return res.status(200).send(product)
@@ -25,14 +28,14 @@ const getProductById = async (req, res) => {
 }
 const createProduct = async (req, res) => {
     try {
-        const { productID, title, category, description, price, url } = req.body
+        const { productID, title, category, description, price, url, countInStock } = req.body
         // if (!images) return res.status(400).json({ message: 'no images given' })
         const product = await productsModel.findOne({ productID })
         if (product)
             return res.status(400).json({ message: 'product already exists' })
 
         const newProduct = new productsModel({
-            productID, title, category, description, price, url
+            productID, title, category, description, price, url, countInStock
         })
         await newProduct.save()
         res.json({ 'new product created': newProduct })

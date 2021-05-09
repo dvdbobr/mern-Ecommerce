@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/navbar/navbar.component'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { listProducts, productDetails } from '../../redux/actions/productAction'
 import Card from '../../components/card/card.component'
@@ -8,17 +8,22 @@ import Spinner from '../../components/spinner/spinner.component'
 function ProductDetails() {
     const params = useParams()
     const dispatch = useDispatch()
+    const history = useHistory();
     const productID = params.id
-    const selectedItem = useSelector(state => state.productsList.selectedItem)
+    const [qty, setQty] = useState(1)
+    //const selectedItem = useSelector(state => state.productsList.selectedItem)
     const productInfo = useSelector(state => state.productDetails)
     const productList = useSelector(state => state.productsList)
     const { loading, error, products } = productList
     const { loadingSelected, errorSelected, selectedProduct } = productInfo
+
+    const addToCartHandler = () => {
+        history.push(`/cart/${productID}?qty=${qty}`)
+    }
+
     useEffect(() => {
-        console.log(params.id);
         dispatch(listProducts())
         dispatch(productDetails(productID))
-        // console.log(products[prod])
     }, [dispatch, productID])
     return (
         <>
@@ -26,26 +31,69 @@ function ProductDetails() {
             {
                 <div className="detailsContainer">
                     {
-                        loadingSelected ? <Spinner /> : errorSelected ? <h2>{errorSelected}</h2> :
-                            selectedProduct ?
-                                <div className="productDetailContainer">
-                                    <div className="productDetailInnerContainer">
+                        loadingSelected ? <Spinner /> : errorSelected ? <h1 className="selectedError">{errorSelected}</h1> :
+                            <div className="productDetailContainer">
+                                <div className="productDetailInnerContainer">
 
-                                        <img src={selectedProduct.url} alt="" />
-                                        <div className="productDetails">
-                                            <h2>{selectedProduct.title}</h2>
-                                            <p>{selectedProduct.description}</p>
-                                            <span>${selectedProduct.price}</span>
-                                            <button className="buyBtn">Buy</button>
-                                        </div>
-
+                                    <img src={selectedProduct.url} alt="" />
+                                    <div className="productDetails">
+                                        <h2>{selectedProduct.title}</h2>
+                                        <p>{selectedProduct.description}</p>
+                                        <span>Price: ${selectedProduct.price}</span>
+                                        <button className="buyBtn">Buy</button>
                                     </div>
-                                </div>
+                                    <div className="productDetailsCart">
+                                        <table>
+                                            <tr>
+                                                <td>Price:</td>
+                                                <td>${selectedProduct.price}</td>
 
-                                : <h1>no item was chosen</h1>
+                                            </tr>
+                                            <tr>
+                                                <td>Status:</td>
+                                                <td>{
+                                                    selectedProduct.countInStock > 0 ?
+                                                        <span className="success">In Stock</span> :
+                                                        <span className="danger">Unavailable</span>
+                                                }
+                                                </td>
+                                            </tr>
+                                            {selectedProduct.countInStock > 0 &&
+                                                <tr>
+                                                    <td>Qty:</td>
+                                                    <td>
+                                                        <select value={qty} onChange={e => setQty(e.target.value)} id="">
+                                                            {[...Array(selectedProduct.countInStock).keys()].map(x => (
+                                                                <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                            ))}
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </table>
+
+                                        <button className="addToCartBtn" onClick={addToCartHandler}>Add To Cart</button>
+                                        {/* <div className="productDetailsCartRow">Price: <span>{selectedProduct.price}</span></div> */}
+                                        {/* {
+                                            selectedProduct.countInStock > 0 ? (
+                                                <>
+                                                    <div className="productDetailsCartRow">
+                                                        Status: <span className="success">
+                                                            In Stock
+                                                        </span>
+                                                    </div>
+
+                                                </>
+                                            ) :
+                                                <span className="danger">Out Of Stock</span>
+                                        } */}
+                                    </div>
+
+                                </div>
+                            </div>
                     }
                     {
-                        loading ? <Spinner />
+                        !errorSelected ? loading ? <Spinner />
                             : error ? <h2>{error}</h2> :
                                 <>
                                     <h1 className="relatedTitle">Related items</h1>
@@ -65,13 +113,10 @@ function ProductDetails() {
                                             })
                                         }
                                     </div>
-                                </>
+                                </> : null
                     }
                 </div>
             }
-            <div className="relatedProducts">
-
-            </div>
         </>
     )
 }

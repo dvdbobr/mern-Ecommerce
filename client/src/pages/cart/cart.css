@@ -1,0 +1,36 @@
+.cartContainer {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.cartItems {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    height: 100vh;
+}
+
+.cartItems .cartItemsRow {
+    margin-bottom: 2rem;
+}
+
+.cartItemsRow {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+}
+
+.cartImg {}
+
+.cartImg img {
+    width: 100px;
+    height: 100px;
+}
+
+.cartTotal {
+    display: flex;
+    flex-direction: column;
+}

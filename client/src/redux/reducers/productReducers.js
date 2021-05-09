@@ -14,8 +14,8 @@ const initialState = {
     selectedItem: {},
 }
 const productInitialState = {
-    loading: false,
-    error: false,
+    loadingSelected: false,
+    errorSelected: false,
     selectedProduct: {},
 }
 export const productListReducer = (state = initialState, action) => {
@@ -34,14 +34,14 @@ export const productListReducer = (state = initialState, action) => {
     }
 }
 export const productDetailsReducer = (state = productInitialState, action) => {
-    console.log(action.payload)
+    // console.log(action.payload)
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
-            return { ...state, loading: true }
+            return { ...state, loadingSelected: true }
         case PRODUCT_DETAILS_SUCCESS:
-            return { ...state, loading: false, selectedProduct: action.payload }
+            return { ...state, loadingSelected: false, selectedProduct: action.payload }
         case PRODUCT_DETAILS_FAILURE:
-            return { ...state, loading: false, error: action.payload }
+            return { ...state, loadingSelected: false, errorSelected: "no such product" }
         default:
             return state
     }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+//import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { login } from '../../redux/actions/userActions'
@@ -38,7 +38,7 @@ function Login() {
         if (userInfo)
             history.push(`/`)
 
-    }, [userInfo])
+    }, [userInfo, history])
     return (
         <>
             <Navbar />
@@ -56,7 +56,7 @@ function Login() {
                         <div className="loginFunctions">
                             <button type="submit">Login</button>
                         </div>
-                            <span className="loginAndRegisterAccount">Don't have an account? <Link to={'/register'}>Register</Link></span>
+                        <span className="loginAndRegisterAccount">Don't have an account? <Link to={'/register'}>Register</Link></span>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-import { itemDetails } from '../../redux/actions/productAction'
+// import { itemDetails } from '../../redux/actions/productAction'
 //import { Link } from 'react-router-dom'
 // import {  useDispatch } from 'react-redux'
 function Card(props) {
