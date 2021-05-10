@@ -14,6 +14,9 @@ router.get('/', (req, res) => {
 }).post('/logout', auth, (req, res) => {
     userController.logout(req, res);
 })
+// .put('/addToCart', auth, (req, res) => {
+//     userController.addToCart(req, res);
+// })
 
 
 module.exports = router;

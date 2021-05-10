@@ -39,7 +39,7 @@ const login = async (req, res) => {
         const user = await usersModel.findByCredentials(email, password)
         const token = await user.generateAuthToken()
         res.cookie("ut", token)
-        res.send({ msg: 'login successful', user: user.getPublicProfile(), token })
+        res.send({ message: 'login successful', user: user.getPublicProfile(), token })
     }
     catch (err) {
         console.log(err.message)
@@ -53,7 +53,7 @@ const logout = async (req, res) => {
         })
         await req.user.save()
 
-        res.send({ msg: 'you have successfully logged out' })
+        res.send({ message: 'you have successfully logged out' })
     }
     catch (err) {
         return res.status(400).send(err.message)
@@ -62,17 +62,34 @@ const logout = async (req, res) => {
 const getMyUser = async (req, res) => {
     try {
         const user = await usersModel.findById(req.user._id)
-        if (!user) return res.status(400).json({ msg: "User doesn't exist" })
+        if (!user) return res.status(400).json({ message: "User doesn't exist" })
         return res.send(req.user)
     }
     catch (err) {
-        return res.status(500).json({ msg: err.message })
+        return res.status(500).json({ message: err.message })
     }
 }
+// const addToCart = async (req, res) => {
+//     try {
+//         const user = await usersModel.findById(req.user.id)
+//         if (!user)
+//             return res.status(400).send('no such user')
+//         await usersModel.findOneAndUpdate({ _id: req.user.id },
+//             {
+//                 cart: req.body.cart
+//             }
+//         )
+//         return res.status(200).send({ message: "Item was added successfully" })
+//     }
+//     catch (err) {
+//         return res.status(500).send({ message: err.message })
+//     }
+// }
 module.exports = {
     register,
     getUsers,
     login,
     logout,
     getMyUser,
+    // addToCart,
 }

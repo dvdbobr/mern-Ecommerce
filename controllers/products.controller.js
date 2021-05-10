@@ -2,12 +2,41 @@ const productsModel = require('../models/products.model');
 
 
 const getProducts = async (req, res) => {
-    // const pageSize = 2;
-    // const page = Number(req.query.pageNumber)||1
     try {
-        // const count= await productsModel.count({})
         const products = await productsModel.find({})
-        return res.send(products);
+        return res.status(200).send(products)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+
+}
+const getPaginatedProducts = async (req, res) => {
+    // const page = Number(req.query.pageNumber)||1
+    //const limit = parseInt(req.query.limit)
+    // const startIndex = (page - 1) * limit
+    // const endIndex = page * limit
+    const pageLimit = 4;
+    const page = parseInt(req.query.page) || 1  // 1 if not included
+
+    try {
+        // const results = {}
+        // if (endIndex < products.length)
+        //     results.next = {
+        //         page: page + 1,
+        //         limit: limit
+        //     }
+        // if (startIndex > 0) {
+        //     results.previous = {
+        //         page: page - 1,
+        //         limit: limit
+        //     }
+        // }
+        const count = await productsModel.count({})
+        const products = await productsModel.find({}).limit(pageLimit).skip(pageLimit * (page - 1))
+
+        //results.results = products.slice(startIndex, endIndex)
+        return res.send({ products, page, pages: Math.ceil(count / pageLimit) });
     }
     catch (err) {
         return res.status(500).json({ message: err.message })
@@ -71,6 +100,7 @@ const updateProduct = async (req, res) => {
 }
 module.exports = {
     getProducts,
+    getPaginatedProducts,
     getProductById,
     createProduct,
     deleteProductById,

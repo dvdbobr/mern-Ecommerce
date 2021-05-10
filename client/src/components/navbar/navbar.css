@@ -20,23 +20,26 @@
 .navbar-right div {
     margin-right: 20px;
 }
-.navbarCart{
+
+.navbarCart {
     position: relative;
-    padding-top:10px;
+    padding-top: 10px;
     /* padding-left: 25px; */
 }
-.cartCounter{
-    position:absolute;
+
+.cartCounter {
+    position: absolute;
     background-color: #4dd8d8;
     text-align: center;
     font-weight: bold;
     color: crimson;
-    border-radius:50%;
-    width:25px;
+    border-radius: 50%;
+    width: 25px;
     height: 25px;
     top: 0px;
     left: 26px;
 }
+
 .logo {
     width: 200px;
     height: 68px;
@@ -53,7 +56,6 @@
 .navbarLogin {
     position: relative;
     width: 110px;
-    
 }
 
 .navbarLogin:hover .loggedIn {
@@ -68,7 +70,7 @@
     visibility: hidden;
     right: -15px;
     text-align: center;
-    font-size:2rem;
+    font-size: 2rem;
     height: 50px;
     width: 120px;
     padding: 20px;
@@ -77,9 +79,55 @@
 .loggedIn span:hover {
     cursor: pointer;
 }
-.logoutArrow{
-    position:absolute;
-    right:0;
+
+.logoutArrow {
+    position: absolute;
+    right: 0;
     top: 10px;
     /* padding-top: 12px; */
 }
+
+.logoutModal {
+    z-index: 10;
+    color: black;
+    position: fixed;
+    width: 400px;
+    height: 250px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 20px;
+    top: 40vh;
+    left: 40vw;
+}
+
+.logoutModal button {
+    width: 100px;
+    height: 40px;
+    font-size: 1.3rem;
+    margin-top: 70px;
+}
+.logoutModal button:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+.logoutModalOverlay {
+    z-index: 5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    opacity: 0.5;
+}
+
+.logoutConfirmBtn {
+    margin-left: 158px;
+    background-color:crimson;
+}
+.logoutConfirmBtn a {
+    font-size: 1.3rem;
+}
+
+.logoutCancelBtn {}

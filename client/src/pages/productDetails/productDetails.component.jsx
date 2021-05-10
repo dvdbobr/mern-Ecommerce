@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { listProducts, productDetails } from '../../redux/actions/productAction'
 import Card from '../../components/card/card.component'
 import Spinner from '../../components/spinner/spinner.component'
+import axios from 'axios'
 function ProductDetails() {
     const params = useParams()
     const dispatch = useDispatch()
@@ -16,12 +17,17 @@ function ProductDetails() {
     const productList = useSelector(state => state.productsList)
     const { loading, error, products } = productList
     const { loadingSelected, errorSelected, selectedProduct } = productInfo
-
+    const [allproducts, setAllProducts] = useState([])
     const addToCartHandler = () => {
         history.push(`/cart/${productID}?qty=${qty}`)
     }
 
     useEffect(() => {
+        const getAllProducts = async () => {
+            const result = await axios.get('/api/products')
+            setAllProducts(result.data);
+        }
+        getAllProducts()
         dispatch(listProducts())
         dispatch(productDetails(productID))
     }, [dispatch, productID])
@@ -40,7 +46,7 @@ function ProductDetails() {
                                         <h2>{selectedProduct.title}</h2>
                                         <p>{selectedProduct.description}</p>
                                         <span>Price: ${selectedProduct.price}</span>
-                                        <button className="buyBtn">Buy</button>
+                                        {/* <button className="buyBtn">Buy</button> */}
                                     </div>
                                     <div className="productDetailsCart">
                                         <table>
@@ -94,12 +100,12 @@ function ProductDetails() {
                     }
                     {
                         !errorSelected ? loading ? <Spinner />
-                            : error ? <h2>{error}</h2> :
+                            : error ? <h2>{error}</h2> : allproducts &&
                                 <>
                                     <h1 className="relatedTitle">Related items</h1>
                                     <div className="cardContainer">
                                         {
-                                            products.filter(p => {
+                                            allproducts.filter(p => {
                                                 return p.productID !== selectedProduct.productID
                                             }).map(product => {
                                                 return product.category === selectedProduct.category ? <Card

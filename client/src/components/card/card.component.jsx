@@ -1,7 +1,7 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
 // import { itemDetails } from '../../redux/actions/productAction'
-//import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 // import {  useDispatch } from 'react-redux'
 function Card(props) {
     const history = useHistory();
@@ -11,7 +11,7 @@ function Card(props) {
         history.push(`/details/${props.id}`)
     }
     const shortenDescription = (description) => {
-        return description.slice(0, 25)+"..."
+        return description.slice(0, 25) + "..."
     }
     return (
         <div className="card">
@@ -30,7 +30,7 @@ function Card(props) {
             </p>
             <span>Price: ${props.price}</span>
             <div className="cardFunctions">
-                <button className="buyBtn">Buy</button>
+                {/* <button className="buyBtn">Buy</button> */}
                 <button className="viewBtn" onClick={onViewClick}>View</button>
                 {/* <Link to={`/details/${props.id}`} onClick={ }>View</Link> */}
             </div>

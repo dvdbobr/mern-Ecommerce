@@ -24,7 +24,12 @@ export const productListReducer = (state = initialState, action) => {
             return { ...state, loading: true }
         case PRODUCT_LIST_SUCCESS:
             // console.log(action.payload)
-            return { ...state, loading: false, products: action.payload.data }
+            return {
+                 loading: false, 
+                 products: action.payload.data.products,
+                 pages:action.payload.data.pages,
+                 page:action.payload.data.page
+                 }
         case PRODUCT_LIST_FAILURE:
             return { ...state, loading: false, error: action.payload }
         case SELECTED_PRODUCT:
