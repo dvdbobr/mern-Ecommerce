@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import logo from '../../Images/logo3.png'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaTimes, FaShoppingCart } from 'react-icons/fa'
+import { FcSearch } from 'react-icons/fc'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/actions/userActions'
@@ -12,6 +13,7 @@ function Navbar() {
     const [menuHandler, setMenuHandler] = useState(true)
     const [logoutPopup, setLogoutPopup] = useState(false)
     const [logoutConfirm, setLogoutConfirm] = useState(false)
+    const [keyword, setKeyword] = useState('')
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
     const cart = useSelector(state => state.cart)
@@ -19,7 +21,7 @@ function Navbar() {
     const changeMenuHandler = () => {
         setMenuHandler(!menuHandler)
     }
-    const confirmHandler = () =>{
+    const confirmHandler = () => {
         setLogoutConfirm(true)
         setLogoutPopup(false)
         dispatch(logout())
@@ -27,6 +29,9 @@ function Navbar() {
     }
     const logoutHandler = () => {
         setLogoutPopup(true)
+    }
+    const searchHandler = e => {
+        setKeyword(e.target.value)
     }
     return (
         <div className="navbar">
@@ -37,7 +42,13 @@ function Navbar() {
                 <div className="logo">
                     <Link to={"/"}><img src={logo} alt="logo" /></Link>
                 </div>
+
+                <div className="searchInput">
+                    <input type="text" value={keyword} name={keyword} onChange={searchHandler} placeholder="search for an item" />
+                    {keyword && <Link to={`/search/${keyword}`}><FcSearch /></Link>}
+                </div>
             </div>
+
             <div className="navbar-right">
                 <div><Link to={"/"}>Home</Link> </div>
                 <>
@@ -62,7 +73,7 @@ function Navbar() {
                 {
                     logoutPopup ?
                         <>
-                        <div className="logoutModalOverlay"></div>
+                            <div className="logoutModalOverlay"></div>
                             <div className="logoutModal">
                                 <h2>If you logout your cart will not be saved, are you sure you want to logout?</h2>
                                 <button className="logoutCancelBtn" onClick={() => setLogoutPopup(false)}>Cancel</button>

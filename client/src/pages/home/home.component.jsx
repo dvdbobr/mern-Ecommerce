@@ -18,13 +18,14 @@ function Home() {
     const { userInfo } = userLogin
     const params = useParams()
     const pageNumber = params.pageNumber || 1
+    const keyword = params.keyword
     useEffect(() => {
         const cookie = cookies.get('ut')
         if (cookie)
             console.log(cookie);
-        dispatch(listProducts(pageNumber))
+        dispatch(listProducts(pageNumber, keyword))
         userInfo ? console.log(userInfo.user) : console.log("not logged in");;
-    }, [dispatch, userInfo, pageNumber])
+    }, [dispatch, userInfo, pageNumber, keyword])
     return (
         <>
             <Navbar />
@@ -47,12 +48,12 @@ function Home() {
                                         }) : ''
                                     }
                                 </div>
-                                <Paginate pages={pages} page={page}></Paginate>
+                                <Paginate pages={pages} page={page} keyword={keyword}></Paginate>
 
                             </>
 
                 }
-                
+
             </div>
         </>
     )

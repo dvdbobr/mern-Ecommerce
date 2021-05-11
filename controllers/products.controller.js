@@ -32,8 +32,14 @@ const getPaginatedProducts = async (req, res) => {
         //         limit: limit
         //     }
         // }
-        const count = await productsModel.count({})
-        const products = await productsModel.find({}).limit(pageLimit).skip(pageLimit * (page - 1))
+        const keyword = req.query.keyword ? {
+            title: {
+                $regex: req.query.keyword,
+                $options: 'i'
+            },
+        } : {}
+        const count = await productsModel.countDocuments({...keyword})
+        const products = await productsModel.find({...keyword}).limit(pageLimit).skip(pageLimit * (page - 1))
 
         //results.results = products.slice(startIndex, endIndex)
         return res.send({ products, page, pages: Math.ceil(count / pageLimit) });

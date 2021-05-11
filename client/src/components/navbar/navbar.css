@@ -16,11 +16,28 @@
     justify-content: space-evenly;
     width: 300px;
 }
-
+.navbar-right{
+    position: relative;
+}
 .navbar-right div {
     margin-right: 20px;
 }
-
+.searchInput{
+    position: absolute;
+    left: 400px;
+    top: 12px;
+    display: flex;
+    align-items: center;
+}
+.searchInput  input {
+ 
+    /* background: #4dd8d8c5;; */
+    /* color: white; */
+    height: 36px;
+    margin-right: 8px;
+    padding: 6px;
+    font-size: 20px;
+}
 .navbarCart {
     position: relative;
     padding-top: 10px;
@@ -107,10 +124,12 @@
     font-size: 1.3rem;
     margin-top: 70px;
 }
-.logoutModal button:hover{
+
+.logoutModal button:hover {
     opacity: 0.7;
     cursor: pointer;
 }
+
 .logoutModalOverlay {
     z-index: 5;
     position: fixed;
@@ -124,10 +143,9 @@
 
 .logoutConfirmBtn {
     margin-left: 158px;
-    background-color:crimson;
+    background-color: crimson;
 }
+
 .logoutConfirmBtn a {
     font-size: 1.3rem;
 }
-
-.logoutCancelBtn {}

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function Paginate({ pages, page }) {
+function Paginate({ pages, page, keyword }) {
     return (
         pages > 1 && (<>
             <div className="paginate">
                 {[...Array(pages).keys()].map(x => {
-                    return <Link to={`/page/${x + 1}`} className={x + 1 === page?'active':''}>
+                    return <Link to={`${keyword ? `/search/${keyword}` : ''}/page/${x + 1}`} className={x + 1 === page ? 'active' : ''}>
                         {x + 1}
                     </Link>
 

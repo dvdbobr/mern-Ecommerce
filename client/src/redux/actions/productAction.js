@@ -8,12 +8,12 @@ import {
     PRODUCT_DETAILS_SUCCESS,
     PRODUCT_DETAILS_FAILURE
 } from '../constants/productConstants'
-export const listProducts = (page = '') => async (dispatch) => {
+export const listProducts = (page = '', keyword = '') => async (dispatch) => {
     dispatch({
         type: PRODUCT_LIST_REQUEST
     })
     try {
-        const {data} = await axios.get(`/api/products/paginated?page=${page}`)
+        const { data } = await axios.get(`/api/products/paginated?keyword=${keyword}&page=${page}`)
         console.log(data)
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: { data: data } })
     }

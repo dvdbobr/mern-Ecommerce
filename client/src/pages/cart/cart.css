@@ -34,3 +34,12 @@
     display: flex;
     flex-direction: column;
 }
+.emptyCart{
+    margin-left: 50%;
+    margin-top: 30vh;
+    font-size:2.5rem;
+}
+.emptyCart a{
+    font-size:3rem;
+    padding-left: 70px;
+}

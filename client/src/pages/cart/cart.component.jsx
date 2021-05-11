@@ -49,10 +49,10 @@ function Cart(props) {
                             </div>
 
                         }) :
-                        <>
+                        <div className="emptyCart">
                             <h1>Cart is empty</h1>
                             <Link to={`/`}>Go To Homepage</Link>
-                        </>
+                        </div>
                     }
                 </div>
                 <div className="cartTotal">

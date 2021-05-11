@@ -21,6 +21,8 @@ function App() {
   return (
     <BrowserRouter>
       <Route exact path='/' component={Home} />
+      <Route exact path='/search/:keyword' component={Home} />
+      <Route exact path='/search/:keyword/page/:pageNumber' component={Home} />
       <Route exact path='/page/:pageNumber' component={Home} />
       <Route exact path='/details/:id' component={ProductDetails} />
       <Route exact path='/login' component={Login} />
