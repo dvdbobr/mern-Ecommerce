@@ -5,7 +5,7 @@
 }
 
 .cartItems {
-    padding: 20px;
+    padding: 20px 20vw;
     display: flex;
     flex-direction: column;
     width: 80vw;
@@ -18,7 +18,7 @@
 
 .cartItemsRow {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 }

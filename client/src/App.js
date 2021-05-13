@@ -10,12 +10,19 @@ import './pages/productDetails/productDetails.css';
 import './pages/login/login.css'
 import './pages/cart/cart.css'
 import './components/paginate/paginate.css'
+import './components/checkoutBreadCrumbs/breadcrumbs.css'
+import './pages/shipment/shipment.css'
+import './pages/payment/payment.css'
+import './pages/order/order.css'
 import './components/spinner/spinner.css';
 import Home from './pages/home/home.component';
 import ProductDetails from './pages/productDetails/productDetails.component';
 import Login from './pages/login/login.component';
 import Register from './pages/register/register.component';
 import Cart from './pages/cart/cart.component';
+import Shipment from './pages/shipment/shipment.component';
+import Payment from './pages/payment/payment.component';
+import Order from './pages/order/order.component';
 function App() {
 
   return (
@@ -28,6 +35,9 @@ function App() {
       <Route exact path='/login' component={Login} />
       <Route exact path='/register' component={Register} />
       <Route exact path='/cart/:id?' component={Cart} />
+      <Route exact path='/shipment' component={Shipment} />
+      <Route exact path='/payment' component={Payment} />
+      <Route exact path='/order' component={Order} />
     </BrowserRouter>
   );
 }

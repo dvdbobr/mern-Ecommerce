@@ -1,0 +1,33 @@
+.orderContainer {
+    margin: 4rem 20vw;
+    height: 500px;
+    width: 60vw;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.orderLeft, .orderRight {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderLeft {
+    width: 70%;
+}
+.orderRight {
+    border: 2px solid;
+    border-radius:10px;
+    height:400px;
+    padding:20px;
+    width:30%;
+    margin-left: 6rem;
+}
+.orderRight button {
+    height: 50px;
+    font-size:1.2rem
+}
+.orderRight button:hover {
+    cursor: pointer;
+}

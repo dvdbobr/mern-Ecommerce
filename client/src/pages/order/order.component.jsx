@@ -1,0 +1,95 @@
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router'
+import { Link } from 'react-router-dom'
+import CheckOutBreadCrumbs from '../../components/checkoutBreadCrumbs/checkoutBreadCrumbs.component'
+import Navbar from '../../components/navbar/navbar.component'
+import Spinner from '../../components/spinner/spinner.component'
+import { makeOrder } from '../../redux/actions/orderAction'
+
+function Order() {
+    const history = useHistory();
+    const dispatch = useDispatch()
+    const [totalPrice, setTotalPrice] = useState(0)
+    const [totalItemsPrice, setItemsTotalPrice] = useState(0)
+    const [totalTax, setTotalTax] = useState(0)
+    const cart = useSelector(state => state.cart)
+    const { shippingAddress, paymentMethod, cartItems } = cart
+    const calculateItemsTotalPrice = () => {
+        setItemsTotalPrice(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
+    }
+    const calculateTotalTax = () => {
+        setTotalTax(totalItemsPrice * 0.15)
+    }
+    const calculateTotalPrice = () => {
+        setTotalPrice(totalItemsPrice + totalItemsPrice * 0.15)
+    }
+
+    const newOrder = useSelector(state => state.makeOrder)
+    const { order, loading, error } = newOrder
+    const completeOrderHandler = () => {
+        dispatch(
+            makeOrder({
+                orderItems: cartItems,
+                shippingAddress: shippingAddress,
+                paymentMethod: paymentMethod,
+                itemsPrice: totalItemsPrice,
+                taxPrice: totalTax,
+                totalPrice: totalPrice
+            })
+        )
+    }
+    useEffect(() => {
+        calculateItemsTotalPrice()
+        calculateTotalTax()
+        calculateTotalPrice()
+        if(order){
+            history.push(`/order/${order._id}`)
+        }
+    }, [order,totalPrice,totalTax,totalItemsPrice])
+    return (
+        <>
+            <Navbar />
+            <CheckOutBreadCrumbs step1 step2 step3 step4 />
+            <div className="orderContainer">
+                <div className="orderLeft">
+                    <h1>Order Details:</h1><br />
+                    <h3>SHIPPING:</h3>
+                    <p>Address: {shippingAddress.address}</p>
+                    <p>Country: {shippingAddress.country}</p>
+                    <p>City: {shippingAddress.city}</p>
+                    <p>Postal Code: {shippingAddress.postalCode}</p><br /><hr /><br />
+                    <h3>PAYMENT METHOD:</h3>
+                    <p>{paymentMethod}</p><br /><hr /><br />
+                    <h3>CART ITEMS:</h3><br />
+                    {cartItems.length > 0 && cartItems.map(cartItem => {
+                        return (
+                            <>
+                                <div map={cartItem.productID} className="cartItemsRow">
+                                    <span className="cartImg"><img src={cartItem.url} alt="img" /></span>
+                                    <span><Link to={`/details/${cartItem.product}`}>{cartItem.title}</Link></span>
+                                    <span className="cartPrice">${cartItem.price}</span>
+                                    <span>Qty: {cartItem.qty}</span>
+                                    <span>Price: ${(cartItem.price * cartItem.qty).toFixed(2)}</span>
+                                </div>
+                                <br /><hr />
+                            </>
+                        )
+                    })}
+                </div>
+                <div className="orderRight">
+                    <h1>Total Price:</h1>
+                    <span>Items Total: ${(totalItemsPrice).toFixed(2)}</span><br /><hr /><br />
+                    <span>Tax Total: ${(totalTax).toFixed(2)}</span><br /><hr /><br />
+                    <strong>Total Price: ${(totalPrice).toFixed(2)}</strong><br /><hr /><br />
+                    {loading ? <Spinner /> :
+                        error && <h2>{error}</h2>}
+                    <button disabled={cartItems.length === 0} onClick={completeOrderHandler}>Complete Order</button>
+                </div>
+            </div>
+
+        </>
+    )
+}
+
+export default Order

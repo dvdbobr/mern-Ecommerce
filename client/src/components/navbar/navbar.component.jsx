@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import logo from '../../Images/logo3.png'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { FaTimes, FaShoppingCart } from 'react-icons/fa'
@@ -7,9 +7,10 @@ import { FcSearch } from 'react-icons/fc'
 import { TiArrowSortedDown } from 'react-icons/ti'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../../redux/actions/userActions'
-import { removeAllFromCart } from '../../redux/actions/cartAction'
+import { deleteShippingAddress, removeAllFromCart } from '../../redux/actions/cartAction'
 function Navbar() {
     const dispatch = useDispatch()
+    const history = useHistory();
     const [menuHandler, setMenuHandler] = useState(true)
     const [logoutPopup, setLogoutPopup] = useState(false)
     const [logoutConfirm, setLogoutConfirm] = useState(false)
@@ -26,6 +27,8 @@ function Navbar() {
         setLogoutPopup(false)
         dispatch(logout())
         dispatch(removeAllFromCart())
+        dispatch(deleteShippingAddress())
+        history.push('/')
     }
     const logoutHandler = () => {
         setLogoutPopup(true)
@@ -77,7 +80,7 @@ function Navbar() {
                             <div className="logoutModal">
                                 <h2>If you logout your cart will not be saved, are you sure you want to logout?</h2>
                                 <button className="logoutCancelBtn" onClick={() => setLogoutPopup(false)}>Cancel</button>
-                                <button className="logoutConfirmBtn" onClick={confirmHandler}><Link to={'/'}>Confirm</Link></button>
+                                <button className="logoutConfirmBtn" onClick={confirmHandler}>Confirm</button>
                             </div>
                         </>
                         : ''

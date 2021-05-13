@@ -13,18 +13,24 @@ function Cart(props) {
     const qty = props.location.search ? Number(props.location.search.split('=')[1]) : 1;
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
     const removeFromCartHandler = (id) => {
         console.log(id);
         dispatch(removeFromCart(id))
     }
     const checkOutHandler = () => {
-        history.push(`/login`)
+        if (userInfo)
+            history.push(`/shipment`)
+        else
+            history.push(`/login`)
     }
     useEffect(() => {
         if (productID) {
             dispatch(addToCart(productID, qty));
         }
-    }, [dispatch, productID, qty]);
+    }, [dispatch, productID, qty, userInfo]);
+    console.log(userInfo);
     return (
         <>
             <Navbar />
@@ -34,7 +40,7 @@ function Cart(props) {
                         cartItems.map(cartItem => {
                             return <div className="cartItemsRow">
                                 <div className="cartImg"><img src={cartItem.url} alt="img" /></div>
-                                <div><Link to={`/details/${cartItem.product}`}></Link>{cartItem.title}</div>
+                                <div><Link to={`/details/${cartItem.product}`}>{cartItem.title}</Link></div>
                                 <div className="cartSelect">
                                     <select value={cartItem.qty} onChange={e => dispatch(addToCart(cartItem.product, Number(e.target.value)))}>
                                         {[...Array(cartItem.countInStock).keys()].map(x => (
@@ -57,11 +63,13 @@ function Cart(props) {
                 </div>
                 <div className="cartTotal">
                     Subtotal: ({cartItems.reduce((a, b) => a + b.qty, 0)} items):{cartItems.reduce((a, b) => a + b.qty * b.price, 0)}
-                    <button className="cartCheckout"
-                        disabled={cartItems.length === 0}
-                        onClick={checkOutHandler}
-                    >Proceed To Checkout
+                    {
+                        <button className="cartCheckout"
+                            disabled={cartItems.length === 0}
+                            onClick={checkOutHandler}
+                        >Proceed To Checkout
                     </button>
+                    }
                 </div>
             </div>
         </>
