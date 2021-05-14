@@ -2,9 +2,15 @@ const mongoose = require('mongoose');
 
 
 const orderSchema = new mongoose.Schema({
-    orderItems: {
-        type: Object,
+    userID: {
+        type: String,
+        index: true,
+        unique: false,
+        sparse: true
     },
+    orderItems: [
+
+    ],
     shippingAddress: {
         type: Object,
     },

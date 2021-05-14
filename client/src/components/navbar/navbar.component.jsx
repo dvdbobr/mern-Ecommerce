@@ -61,8 +61,19 @@ function Navbar() {
                                 <Link to={"/"}>{userInfo.user.firstName}</Link>
                                 <div className="logoutArrow"><TiArrowSortedDown size={23} color={"black"} /></div>
                                 <div className="loggedIn">
-                                    <Link to={"#logout"} onClick={logoutHandler}>Logout</Link>
+                                    <ul>
+                                        {
+                                            userInfo.user.role === 1 && <>
+                                                <li><Link to={'/admin/products'}>Products</Link></li> <hr />
+                                            </>
+                                        }
+                                        <li><Link to={"/user/myorders"}>My Orders</Link></li><hr />
+                                        <li><Link to={"#"} onClick={logoutHandler}>Logout</Link></li>
+                                    </ul>
+
                                 </div>
+
+
                             </div>
                             :
                             <div>

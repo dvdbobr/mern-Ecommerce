@@ -8,13 +8,20 @@ import Spinner from '../../components/spinner/spinner.component'
 import { makeOrder } from '../../redux/actions/orderAction'
 
 function Order() {
+    // eslint-disable-next-line
     const history = useHistory();
     const dispatch = useDispatch()
     const [totalPrice, setTotalPrice] = useState(0)
     const [totalItemsPrice, setItemsTotalPrice] = useState(0)
     const [totalTax, setTotalTax] = useState(0)
     const cart = useSelector(state => state.cart)
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     const { shippingAddress, paymentMethod, cartItems } = cart
+    // cart.itemsPrice = addItemsPrice(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
+    // cart.taxPrice = addTaxPrice((cart.itemsPrice * 0.15).toFixed(2))
+    // cart.totalPrice = totalPrice((cart.itemsPrice + cart.taxPrice).toFixed(2))
     const calculateItemsTotalPrice = () => {
         setItemsTotalPrice(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
     }
@@ -43,10 +50,13 @@ function Order() {
         calculateItemsTotalPrice()
         calculateTotalTax()
         calculateTotalPrice()
-        if(order){
+        if (order) {
+            console.log("hi");
             history.push(`/order/${order._id}`)
         }
-    }, [order,totalPrice,totalTax,totalItemsPrice])
+        console.log(userInfo.user._id);
+    }, [order, totalPrice, totalItemsPrice, totalTax])
+
     return (
         <>
             <Navbar />

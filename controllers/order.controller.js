@@ -9,14 +9,15 @@ const makeOrder = async (req, res) => {
         }
         else {
             const order = new ordersModel({
-                user: req.user._id,
-                orderItems: orderItems,
-                shippingAddress: shippingAddress,
-                paymentMethod: paymentMethod,
-                itemsPrice: itemsPrice,
-                taxPrice: taxPrice,
-                totalPrice: totalPrice,
+                userID: req.user._id,
+                orderItems,
+                shippingAddress,
+                paymentMethod,
+                itemsPrice,
+                taxPrice,
+                totalPrice,
             })
+            console.log(order);
             await order.save()
             return res.send(order)
         }
@@ -25,6 +26,25 @@ const makeOrder = async (req, res) => {
         return res.status(500).json({ message: err.message })
     }
 }
+const getOrderById = async (req, res) => {
+    try {
+        const order = await (await ordersModel.findById(req.params.id))
+
+        if (!order)
+            return res.status(400).json({ message: "order not found" })
+        res.send(order)
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
+
+const getUserOrders = async (req, res) => {
+    const orders = await ordersModel.find({ userID: req.user._id })
+    res.json(orders)
+}
 module.exports = {
     makeOrder,
+    getOrderById,
+    getUserOrders
 }
