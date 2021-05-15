@@ -14,6 +14,7 @@ import './components/checkoutBreadCrumbs/breadcrumbs.css'
 import './pages/shipment/shipment.css'
 import './pages/payment/payment.css'
 import './pages/order/order.css'
+import './pages/admin/adminProduct.css'
 import './components/spinner/spinner.css';
 import Home from './pages/home/home.component';
 import ProductDetails from './pages/productDetails/productDetails.component';

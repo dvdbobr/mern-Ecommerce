@@ -39,7 +39,7 @@ const login = async (req, res) => {
         const user = await usersModel.findByCredentials(email, password)
         const token = await user.generateAuthToken()
         res.cookie("ut", token)
-        res.send({ message: 'login successful', user: user.getPublicProfile(), token })
+        res.send({ user: user.getPublicProfile(), token })
     }
     catch (err) {
         console.log(err.message)

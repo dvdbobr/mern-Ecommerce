@@ -82,10 +82,10 @@ const createProduct = async (req, res) => {
 const deleteProductById = async (req, res) => {
     const id = req.params.id;
     try {//can make this find by productID
-        const product = await productModel.findOneAndDelete({ productID: id })
+        const product = await productsModel.findOneAndDelete({ productID: id })
         if (!product)
             return res.send("no such product");
-        res.send(product)
+        res.send("deleted product")
     }
     catch (err) {
         return res.status(500).json({ message: err.message })

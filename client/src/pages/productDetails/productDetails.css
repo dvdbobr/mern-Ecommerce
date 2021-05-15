@@ -45,9 +45,12 @@
 }
 
 .selectedError {
+    z-index: 20;
+    position: absolute;
+    top: 30vh;
+    left: 40vw;
     width: 500px;
     padding: 20px;
-    margin: 30vh auto;
     background-color: crimson;
     text-align: center;
     font-size: 3rem;

@@ -1,0 +1,14 @@
+.adminAddProduct{
+    margin-left: 85vw;
+    margin-top: 2vh;
+}
+.adminAddProduct button{
+    padding: 20px;
+    font-size:1.3rem;
+    background-color:#93d84d;
+    font-weight:bold;
+}
+button:hover{
+    cursor: pointer;
+    opacity: 0.8;
+}
