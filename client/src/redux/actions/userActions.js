@@ -1,5 +1,6 @@
 import { USER_LOGIN_FAILURE, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGOUT } from '../constants/userConstants'
 import axios from 'axios'
+import { MAKE_ORDER_RESET, USER_ORDER_LIST_RESET } from '../constants/orderConstants'
 
 export const login = (email, password) => async (dispatch) => {
     dispatch({ type: USER_LOGIN_REQUEST, payload: { email, password } })
@@ -23,4 +24,6 @@ export const logout = () => (dispatch) => {
     // localStorage.removeItem('cartItems')
     localStorage.clear()
     dispatch({ type: USER_LOGOUT })
+    dispatch({ type: USER_ORDER_LIST_RESET })
+    dispatch({ type: MAKE_ORDER_RESET })
 }

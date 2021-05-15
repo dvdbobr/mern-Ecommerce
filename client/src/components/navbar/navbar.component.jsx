@@ -82,7 +82,7 @@ function Navbar() {
                     }
                 </>
                 <div className="navbarCart"><Link to={"/cart"}><FaShoppingCart /> </Link>
-                    <span className="cartCounter">{cartItems.length}</span>
+                    <span className="cartCounter">{cartItems?cartItems.length:0}</span>
                 </div>
                 {
                     logoutPopup ?

@@ -41,6 +41,8 @@ const getOrderById = async (req, res) => {
 
 const getUserOrders = async (req, res) => {
     const orders = await ordersModel.find({ userID: req.user._id })
+    if (!orders)
+            return res.status(400).json({ message: "orders not found" })
     res.json(orders)
 }
 module.exports = {
