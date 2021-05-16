@@ -8,15 +8,18 @@ import { allProducts, productDelete, } from '../../redux/actions/productAction'
 import { BsTrash } from 'react-icons/bs'
 import { FiEdit } from 'react-icons/fi'
 import { FcPlus } from 'react-icons/fc'
+import { PRODUCT_CREATE_RESET } from '../../redux/constants/productConstants'
 function AdminProducts() {
     const history = useHistory();
     const dispatch = useDispatch();
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-    const deleteProducts = useSelector(state => state.deleteProduct)
-    const { loading: loadingDelete, error: errorDelete, deleted } = deleteProducts
     const allProductsList = useSelector(state => state.allProductsList)
     const { products, loading, error } = allProductsList
+    const deleteProducts = useSelector(state => state.deleteProduct)
+    const { loading: loadingDelete, error: errorDelete, deleted } = deleteProducts
+    const productCreate = useSelector(state => state.productCreate)
+    const { loading: loadingCreate, error: errorCreate } = productCreate
     const [logoutPopup, setLogoutPopup] = useState(false)
     const [logoutConfirm, setLogoutConfirm] = useState(false)
     const [productID, setProductID] = useState('')
@@ -24,8 +27,8 @@ function AdminProducts() {
         setLogoutPopup(true)
         setProductID(id)
     }
-    const editHandler = () => {
-        console.log('edit')
+    const editHandler = (id) => {
+        history.push(`/admin/editProduct/${id}`)
     }
     const confirmHandler = () => {
         setLogoutConfirm(true)
@@ -33,23 +36,27 @@ function AdminProducts() {
         dispatch(productDelete(productID))
     }
 
+    const createProductHandler = () => {
+        history.push('/admin/createProduct')
+    }
     useEffect(() => {
-        dispatch(allProducts())
+        dispatch({ type: PRODUCT_CREATE_RESET })
         if (userInfo && userInfo.user.role === 1)
-            console.log("admin");
+            dispatch(allProducts())
         else
             history.push(`/`)
 
-    }, [userInfo, history, deleted])
+    }, [dispatch,userInfo, history, deleted])
     return (
         <>
             <Navbar />
             <>
                 {loadingDelete ? <Spinner /> : errorDelete ? <h1 className="selectedError">{errorDelete}</h1> : null}
+                {loadingCreate ? <Spinner /> : errorCreate ? <h1 className="selectedError">{errorCreate}</h1> : null}
 
                 {loading ? <Spinner /> : error ? <h1>{error}</h1> :
                     <div className="table-wrapper">
-                        <div className="adminAddProduct"><button>CREATE PRODUCT <FcPlus /></button></div>
+                        <div className="adminAddProduct"><button onClick={createProductHandler}>CREATE PRODUCT <FcPlus /></button></div>
                         <table className="myOrdersTable">
                             <thead>
                                 <tr>
@@ -70,7 +77,7 @@ function AdminProducts() {
                                         <td>${(product.price).toFixed(2)}</td>
                                         <td>{product.countInStock}</td>
                                         <td><BsTrash onClick={() => deleteHandler(product.productID)} /></td>
-                                        <td><FiEdit onClick={editHandler} /></td>
+                                        <td><FiEdit onClick={()=>editHandler(product.productID)} /></td>
                                     </tr>
                                 })}
                             </tbody>

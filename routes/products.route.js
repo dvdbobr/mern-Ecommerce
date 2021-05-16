@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     productController.getPaginatedProducts(req, res);
 }).get('/:id', (req, res) => {
     productController.getProductById(req, res);
-}).post('/', (req, res) => {
+}).post('/',auth,authAdmin, (req, res) => {
     productController.createProduct(req, res);
 }).delete('/:id',auth,authAdmin, (req, res) => {
     productController.deleteProductById(req, res);

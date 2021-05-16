@@ -12,10 +12,7 @@ function MyOrders() {
 
     useEffect(() => {
         dispatch(getUserOrders())
-        console.log(orders);
-        console.log(loading);
-        console.log(error);
-    }, [])
+    }, [dispatch])
     return (
         <>
             <Navbar />

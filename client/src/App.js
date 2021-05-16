@@ -25,8 +25,10 @@ import Shipment from './pages/shipment/shipment.component';
 import Payment from './pages/payment/payment.component';
 import Order from './pages/order/order.component';
 import AdminProducts from './pages/admin/adminProducts.component';
+import AdminCreateProduct from './pages/admin/adminCreateProduct.component';
 import MyOrders from './pages/order/myOrders.component';
 import OrderDetails from './pages/order/orderDetails.components';
+import AdminEditProduct from './pages/admin/adminEditProduct.component';
 function App() {
 
   return (
@@ -45,6 +47,8 @@ function App() {
       <Route exact path='/user/myorders' component={MyOrders} />
       <Route exact path='/order/:id' component={OrderDetails} />
       <Route exact path='/admin/products' component={AdminProducts} />
+      <Route exact path='/admin/createProduct' component={AdminCreateProduct} />
+      <Route exact path='/admin/editProduct/:id' component={AdminEditProduct} />
     </BrowserRouter>
   );
 }

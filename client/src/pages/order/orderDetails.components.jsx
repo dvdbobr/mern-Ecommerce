@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useHistory, useParams } from 'react-router'
+import {  useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/navbar.component'
 import Spinner from '../../components/spinner/spinner.component'
@@ -8,12 +8,12 @@ import { getOrderDetails } from '../../redux/actions/orderAction';
 
 function OrderDetails() {
     // eslint-disable-next-line
-    const history = useHistory();
+    //const history = useHistory();
     const params = useParams()
     const orderId = params.id
     const dispatch = useDispatch()
-    const userLogin = useSelector(state => state.userLogin)
-    const { userInfo } = userLogin
+    //const userLogin = useSelector(state => state.userLogin)
+    //const { userInfo } = userLogin
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
     useEffect(() => {

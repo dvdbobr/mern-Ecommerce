@@ -12,11 +12,10 @@ function ProductDetails() {
     const history = useHistory();
     const productID = params.id
     const [qty, setQty] = useState(1)
-    //const selectedItem = useSelector(state => state.productsList.selectedItem)
     const productInfo = useSelector(state => state.productDetails)
-    const productList = useSelector(state => state.productsList)
-    const { loading, error, products } = productList
     const { loadingSelected, errorSelected, selectedProduct } = productInfo
+    const productList = useSelector(state => state.productsList)
+    const { loading, error } = productList
     const [allproducts, setAllProducts] = useState([])
     const addToCartHandler = () => {
         history.push(`/cart/${productID}?qty=${qty}`)

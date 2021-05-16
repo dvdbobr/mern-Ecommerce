@@ -38,8 +38,8 @@ const getPaginatedProducts = async (req, res) => {
                 $options: 'i'
             },
         } : {}
-        const count = await productsModel.countDocuments({...keyword})
-        const products = await productsModel.find({...keyword}).limit(pageLimit).skip(pageLimit * (page - 1))
+        const count = await productsModel.countDocuments({ ...keyword })
+        const products = await productsModel.find({ ...keyword }).limit(pageLimit).skip(pageLimit * (page - 1))
 
         //results.results = products.slice(startIndex, endIndex)
         return res.send({ products, page, pages: Math.ceil(count / pageLimit) });
@@ -64,7 +64,7 @@ const getProductById = async (req, res) => {
 const createProduct = async (req, res) => {
     try {
         const { productID, title, category, description, price, url, countInStock } = req.body
-        // if (!images) return res.status(400).json({ message: 'no images given' })
+
         const product = await productsModel.findOne({ productID })
         if (product)
             return res.status(400).json({ message: 'product already exists' })
@@ -93,10 +93,10 @@ const deleteProductById = async (req, res) => {
 }
 const updateProduct = async (req, res) => {
     try {
-        const { productID, title, category, description, price, url } = req.body
+        const { productID, title, category, description, price, url, countInStock } = req.body
 
         await productsModel.findOneAndUpdate({ productID: req.params.id }, {
-            productID, title, category, description, price, url
+            productID, title, category, description, price, url, countInStock
         })
         res.json({ message: 'product updated successfully' })
     }
