@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import CheckOutBreadCrumbs from '../../components/checkoutBreadCrumbs/checkoutBreadCrumbs.component'
 import Navbar from '../../components/navbar/navbar.component'
 import Spinner from '../../components/spinner/spinner.component'
+import { deleteShippingAddress, removeAllFromCart } from '../../redux/actions/cartAction'
 import { makeOrder } from '../../redux/actions/orderAction'
 
 function Order() {
@@ -45,6 +46,8 @@ function Order() {
                 totalPrice: totalPrice
             })
         )
+        dispatch(removeAllFromCart())
+        dispatch(deleteShippingAddress())
     }
     useEffect(() => {
         calculateItemsTotalPrice()

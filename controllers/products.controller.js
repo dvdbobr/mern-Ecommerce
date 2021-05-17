@@ -104,6 +104,24 @@ const updateProduct = async (req, res) => {
         return res.status(500).json({ message: err.message })
     }
 }
+
+const updatedCountInStock = async (req, res) => {
+    try {
+        const productID = req.params.id
+        const { qty } = req.body
+        const product = await productsModel.findOne({ productID })
+        const currentStock = product.countInStock - qty;
+        if(currentStock < 0)
+            return res.status(400).send("cant buy this many items")
+        await productsModel.findOneAndUpdate({ productID }, { countInStock: currentStock })
+        await product.save()
+        res.send({ product })
+    }
+    catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
+
 module.exports = {
     getProducts,
     getPaginatedProducts,
@@ -111,4 +129,5 @@ module.exports = {
     createProduct,
     deleteProductById,
     updateProduct,
+    updatedCountInStock,
 }

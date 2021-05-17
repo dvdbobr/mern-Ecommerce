@@ -17,6 +17,8 @@ router.get('/', (req, res) => {
     productController.deleteProductById(req, res);
 }).put('/:id',auth,authAdmin, (req, res) => {
     productController.updateProduct(req, res);
+}).put('/updateProductStock/:id', (req, res) => {
+    productController.updatedCountInStock(req, res);
 })
 
 

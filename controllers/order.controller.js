@@ -5,8 +5,9 @@ const makeOrder = async (req, res) => {
         const { orderItems, shippingAddress, paymentMethod, itemsPrice, taxPrice, totalPrice } = req.body
         // if (!images) return res.status(400).json({ message: 'no images given' })
         if (orderItems && orderItems.length === 0) {
-            return res.status(400).send({ message: 'No items orders' })
+            return res.status(400).send({ message: 'No items in order' })
         }
+
         else {
             const order = new ordersModel({
                 userID: req.user._id,
@@ -17,7 +18,6 @@ const makeOrder = async (req, res) => {
                 taxPrice,
                 totalPrice,
             })
-            console.log(order);
             await order.save()
             return res.send(order)
         }
@@ -42,7 +42,7 @@ const getOrderById = async (req, res) => {
 const getUserOrders = async (req, res) => {
     const orders = await ordersModel.find({ userID: req.user._id })
     if (!orders)
-            return res.status(400).json({ message: "orders not found" })
+        return res.status(400).json({ message: "orders not found" })
     res.json(orders)
 }
 module.exports = {

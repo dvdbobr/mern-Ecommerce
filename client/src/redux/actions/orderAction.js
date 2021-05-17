@@ -27,7 +27,11 @@ export const makeOrder = (order) => async (dispatch, getState) => {
         }
 
         const { data } = await axios.post('/api/order', order, config)
-
+        order.orderItems.forEach(async item => {
+            console.log(item.product, item.qty);
+            await axios.put(`/api/products/updateProductStock/${item.product}`, {"qty":item.qty})
+        })
+        console.log(order.orderItems);
         dispatch({ type: MAKE_ORDER_SUCCESS, payload: data })
     }
     catch (err) {
