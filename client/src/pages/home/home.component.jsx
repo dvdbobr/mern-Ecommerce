@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-//import axios from 'axios'
-import cookies from 'js-cookie'
+// import cookies from 'js-cookie'
 import { useSelector, useDispatch } from 'react-redux'
 import { listProducts } from '../../redux/actions/productAction'
 import Navbar from '../../components/navbar/navbar.component'
@@ -11,7 +10,6 @@ import Paginate from '../../components/paginate/paginate.component'
 
 function Home() {
     const dispatch = useDispatch()
-    // const [token, setToken] = useState('')
     const productList = useSelector(state => state.productsList)
     const { loading, error, products, pages, page } = productList
     const userLogin = useSelector(state => state.userLogin)
@@ -20,11 +18,10 @@ function Home() {
     const pageNumber = params.pageNumber || 1
     const keyword = params.keyword
     useEffect(() => {
-        const cookie = cookies.get('ut')
-        if (cookie)
-            console.log(cookie);
+        // const cookie = cookies.get('ut')
+        // if (cookie)
+        //     console.log(cookie);
         dispatch(listProducts(pageNumber, keyword))
-        userInfo ? console.log(userInfo.user) : console.log("not logged in");;
     }, [dispatch, userInfo, pageNumber, keyword])
     return (
         <>

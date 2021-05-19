@@ -13,7 +13,7 @@ function Navbar() {
     const history = useHistory();
     const [menuHandler, setMenuHandler] = useState(true)
     const [logoutPopup, setLogoutPopup] = useState(false)
-    const [logoutConfirm, setLogoutConfirm] = useState(false)
+    const [, setLogoutConfirm] = useState(false)
     const [keyword, setKeyword] = useState('')
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin

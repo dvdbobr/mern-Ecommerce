@@ -21,7 +21,7 @@ function AdminProducts() {
     const productCreate = useSelector(state => state.productCreate)
     const { loading: loadingCreate, error: errorCreate } = productCreate
     const [logoutPopup, setLogoutPopup] = useState(false)
-    const [logoutConfirm, setLogoutConfirm] = useState(false)
+    const [, setLogoutConfirm] = useState(false)
     const [productID, setProductID] = useState('')
     const deleteHandler = (id) => {
         setLogoutPopup(true)

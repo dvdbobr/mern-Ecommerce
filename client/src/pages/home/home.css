@@ -1,9 +1,6 @@
 body {
     overflow-x: hidden;
     background-color:#F5F5F5;
-    /* color: #fff; */
-    /* background-color: #333; */
-    /* background-color: #93d84d */
     font-family: 'KoHo', sans-serif;
 }
 
@@ -13,7 +10,6 @@ body {
     min-width: 100vh;
     height: 66vh;
     margin: 0 auto;
-    /* border: 2px solid; */
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     font-family: 'KoHo', sans-serif;
 }

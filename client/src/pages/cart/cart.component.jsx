@@ -17,7 +17,6 @@ function Cart(props) {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
     const removeFromCartHandler = (id) => {
-        console.log(id);
         dispatch(removeFromCart(id))
     }
     const checkOutHandler = () => {
@@ -31,7 +30,6 @@ function Cart(props) {
             dispatch(addToCart(productID, qty));
         }
     }, [dispatch, productID, qty, userInfo]);
-    console.log(userInfo);
     return (
         <>
             <Navbar />

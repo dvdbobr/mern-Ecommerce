@@ -9,7 +9,7 @@ import { deleteShippingAddress, removeAllFromCart } from '../../redux/actions/ca
 import { makeOrder } from '../../redux/actions/orderAction'
 
 function Order() {
-    // eslint-disable-next-line
+    
     const history = useHistory();
     const dispatch = useDispatch()
     const [totalPrice, setTotalPrice] = useState(0)
@@ -18,11 +18,8 @@ function Order() {
     const cart = useSelector(state => state.cart)
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-
     const { shippingAddress, paymentMethod, cartItems } = cart
-    // cart.itemsPrice = addItemsPrice(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
-    // cart.taxPrice = addTaxPrice((cart.itemsPrice * 0.15).toFixed(2))
-    // cart.totalPrice = totalPrice((cart.itemsPrice + cart.taxPrice).toFixed(2))
+
     const calculateItemsTotalPrice = () => {
         setItemsTotalPrice(cartItems.reduce((acc, item) => acc + item.price * item.qty, 0))
     }
@@ -54,10 +51,9 @@ function Order() {
         calculateTotalTax()
         calculateTotalPrice()
         if (order) {
-            console.log("hi");
             history.push(`/order/${order._id}`)
         }
-        console.log(userInfo.user._id);
+
     }, [order, totalPrice, totalItemsPrice, totalTax])
 
     return (

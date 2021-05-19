@@ -1,7 +1,6 @@
 .navbar {
     font-family: 'KoHo', sans-serif;
     color: white;
-    /* position: fixed; */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,8 +34,7 @@
 }
 
 .searchInput input {
-    /* background: #4dd8d8c5;; */
-    /* color: white; */
+
     height: 36px;
     margin-right: 8px;
     padding: 6px;
@@ -46,7 +44,6 @@
 .navbarCart {
     position: relative;
     padding-top: 10px;
-    /* padding-left: 25px; */
 }
 
 .cartCounter {
@@ -228,8 +225,7 @@
 }
 
 @media (max-width: 550px) {
-    .navbar-right{
+    .navbar-right {
         display: none
     }
-
 }

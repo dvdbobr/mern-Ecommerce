@@ -17,7 +17,7 @@ function AdminEditProduct() {
     const productInfo = useSelector(state => state.productDetails)
     const { loadingSelected, errorSelected, selectedProduct } = productInfo
     const productUpdated = useSelector(state => state.productUpdate)
-    const { success,product } = productUpdated
+    const { success } = productUpdated
     const [productID, setProductID] = useState('')
     const [title, setTitle] = useState('')
     const [category, setCategory] = useState('')
@@ -41,8 +41,6 @@ function AdminEditProduct() {
             countInStock
         }))
         window.location.href='/admin/products'
-        // history.push('/admin/products')
-
     }
     useEffect(() => {
         if (!userInfo || userInfo.user.role !== 1)
@@ -65,10 +63,8 @@ function AdminEditProduct() {
                 setUrl(selectedProduct.url)
                 setCountInStock(selectedProduct.countInStock)
             }
-            console.log(selectedProduct);
-
         }
-    }, [dispatch, history, pID, selectedProduct, success])
+    }, [dispatch, history, pID, selectedProduct, success,userInfo])
     return (
         <>
             <Navbar />

@@ -23,7 +23,6 @@ function AdminCreateProduct() {
                 Authorization: `${userInfo.token}`
             }
         }
-        console.log(newProduct);
         try {
             await axios.post('/api/products', {
                 "productID": `${newProduct.productID}`,
@@ -45,7 +44,7 @@ function AdminCreateProduct() {
         if (!userInfo || userInfo.user.role !== 1)
             history.push(`/`)
 
-    }, [history])
+    }, [history,userInfo])
     return (
         <>
             <Navbar />

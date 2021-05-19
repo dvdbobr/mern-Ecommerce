@@ -1,7 +1,19 @@
 import React from 'react'
 import { Route } from 'react-router';
-// import User from './components/user.component';
 import { BrowserRouter } from 'react-router-dom';
+import Home from './pages/home/home.component';
+import ProductDetails from './pages/productDetails/productDetails.component';
+import Login from './pages/login/login.component';
+import Register from './pages/register/register.component';
+import Cart from './pages/cart/cart.component';
+import Shipment from './pages/shipment/shipment.component';
+import Payment from './pages/payment/payment.component';
+import Order from './pages/order/order.component';
+import AdminProducts from './pages/admin/adminProducts.component';
+import AdminCreateProduct from './pages/admin/adminCreateProduct.component';
+import MyOrders from './pages/order/myOrders.component';
+import OrderDetails from './pages/order/orderDetails.components';
+import AdminEditProduct from './pages/admin/adminEditProduct.component';
 import './styles/general.css';
 import './components/navbar/navbar.css';
 import './pages/home/home.css';
@@ -16,19 +28,6 @@ import './pages/payment/payment.css'
 import './pages/order/order.css'
 import './pages/admin/adminProduct.css'
 import './components/spinner/spinner.css';
-import Home from './pages/home/home.component';
-import ProductDetails from './pages/productDetails/productDetails.component';
-import Login from './pages/login/login.component';
-import Register from './pages/register/register.component';
-import Cart from './pages/cart/cart.component';
-import Shipment from './pages/shipment/shipment.component';
-import Payment from './pages/payment/payment.component';
-import Order from './pages/order/order.component';
-import AdminProducts from './pages/admin/adminProducts.component';
-import AdminCreateProduct from './pages/admin/adminCreateProduct.component';
-import MyOrders from './pages/order/myOrders.component';
-import OrderDetails from './pages/order/orderDetails.components';
-import AdminEditProduct from './pages/admin/adminEditProduct.component';
 function App() {
 
   return (

@@ -1,13 +1,10 @@
 import React from 'react'
 import { useHistory } from "react-router-dom";
-// import { itemDetails } from '../../redux/actions/productAction'
-// import { Link } from 'react-router-dom'
-// import {  useDispatch } from 'react-redux'
+
 function Card(props) {
     const history = useHistory();
-    // const dispatch = useDispatch()
+
     const onViewClick = () => {
-        // dispatch(itemDetails(props))
         history.push(`/details/${props.id}`)
     }
     const shortenDescription = (description) => {
@@ -29,7 +26,6 @@ function Card(props) {
             </p>
             <span>Price: ${parseFloat(props.price).toFixed(2)}</span>
             <div className="cardFunctions">
-                {/* <button className="buyBtn">Buy</button> */}
                 <button className="viewBtn" onClick={onViewClick}>View</button>
             </div>
         </div>
