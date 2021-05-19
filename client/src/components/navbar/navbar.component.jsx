@@ -39,8 +39,26 @@ function Navbar() {
     return (
         <div className="navbar">
             <div className="navbar-left">
-                <div onClick={changeMenuHandler}>
-                    {menuHandler ? <GiHamburgerMenu size={33} color={"#D84D4D"} /> : <FaTimes size={33} color={"#D84D4D"} />}
+                <div className="hamburgerMenu" onClick={changeMenuHandler}>
+                    {menuHandler ? <GiHamburgerMenu size={33} color={"#D84D4D"} />  : <FaTimes size={33} color={"#D84D4D"} />}
+
+                </div>
+                <div className={`sideMenu ${menuHandler ? 'closeSideMenu hidden' : 'openSideMenu'}`} >
+                    <ul>
+                        <li>
+                            USER
+                                <ul>
+                                {userInfo&&
+                                    userInfo.user.role === 1 && <>
+                                        <li><Link to={'/admin/products'}>Products</Link></li>
+                                    </>
+                                }
+                                <li><Link to={"/user/myorders"}>My Orders</Link></li>
+                                <li><Link to={"#"} onClick={logoutHandler}>Logout</Link></li>
+                            </ul>
+                        </li>
+                        <li><Link to={"/"}>HOME</Link></li>
+                    </ul>
                 </div>
                 <div className="logo">
                     <Link to={"/"}><img src={logo} alt="logo" /></Link>
@@ -82,7 +100,7 @@ function Navbar() {
                     }
                 </>
                 <div className="navbarCart"><Link to={"/cart"}><FaShoppingCart /> </Link>
-                    <span className="cartCounter">{cartItems?cartItems.length:0}</span>
+                    <span className="cartCounter">{cartItems ? cartItems.length : 0}</span>
                 </div>
                 {
                     logoutPopup ?

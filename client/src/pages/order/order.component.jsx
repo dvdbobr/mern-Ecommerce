@@ -80,8 +80,7 @@ function Order() {
                             <>
                                 <div map={cartItem.productID} className="cartItemsRow">
                                     <span className="cartImg"><img src={cartItem.url} alt="img" /></span>
-                                    <span><Link to={`/details/${cartItem.product}`}>{cartItem.title}</Link></span>
-                                    <span className="cartPrice">${cartItem.price}</span>
+                                    <span className="cartTitle"><Link to={`/details/${cartItem.product}`}>{cartItem.title}</Link></span>
                                     <span>Qty: {cartItem.qty}</span>
                                     <span>Price: ${(cartItem.price * cartItem.qty).toFixed(2)}</span>
                                 </div>
@@ -97,7 +96,7 @@ function Order() {
                     <strong>Total Price: ${(totalPrice).toFixed(2)}</strong><br /><hr /><br />
                     {loading ? <Spinner /> :
                         error && <h2>{error}</h2>}
-                    <button disabled={cartItems.length === 0} onClick={completeOrderHandler}>Complete Order</button>
+                    <button className="orderBtn" disabled={cartItems.length === 0} onClick={completeOrderHandler}>Complete Order</button>
                 </div>
             </div>
 

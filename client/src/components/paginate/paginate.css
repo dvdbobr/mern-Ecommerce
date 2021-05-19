@@ -1,6 +1,7 @@
 .paginate {
     display: inline-block;
-    margin-left: 50px;
+    margin-left: 25px;
+    margin-top: 25px;
 }
 
 .paginate a {

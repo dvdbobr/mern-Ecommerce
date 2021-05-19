@@ -1,12 +1,23 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: 'KoHo', sans-serif;
 }
 
-@font-face {
-    font-family: 'coco gothic regular';
+/* @font-face {
+    font-family: "Sentinel Medium";
+    src: url("//db.onlinewebfonts.com/t/9d6de58d886ba70d324b9af0ee96d232.eot");
+    src: url("//db.onlinewebfonts.com/t/9d6de58d886ba70d324b9af0ee96d232.eot?#iefix") format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/9d6de58d886ba70d324b9af0ee96d232.woff2") format("woff2"),
+    url("//db.onlinewebfonts.com/t/9d6de58d886ba70d324b9af0ee96d232.woff") format("woff"),
+    url("//db.onlinewebfonts.com/t/9d6de58d886ba70d324b9af0ee96d232.ttf") format("truetype"),
+    url("//db.onlinewebfonts.com/t/9d6de58d886ba70d324b9af0ee96d232.svg#Sentinel Medium") format("svg");
+} */
+
+/* @font-face {
+    font-family: 'crimson regular';
     font-style: normal;
     font-weight: normal;
-    src: url('../fonts/coco-gothic.regular.ttf') format('tff');
-}
+    src: url('../fonts/CrimsonText-Regular.ttf') format('tff');
+} */

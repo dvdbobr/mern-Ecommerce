@@ -1,4 +1,5 @@
 .navbar {
+    font-family: 'KoHo', sans-serif;
     color: white;
     /* position: fixed; */
     display: flex;
@@ -16,21 +17,24 @@
     justify-content: space-evenly;
     width: 300px;
 }
-.navbar-right{
+
+.navbar-right {
     position: relative;
 }
+
 .navbar-right div {
     margin-right: 20px;
 }
-.searchInput{
+
+.searchInput {
     position: absolute;
     left: 400px;
     top: 12px;
     display: flex;
     align-items: center;
 }
-.searchInput  input {
- 
+
+.searchInput input {
     /* background: #4dd8d8c5;; */
     /* color: white; */
     height: 36px;
@@ -38,6 +42,7 @@
     padding: 6px;
     font-size: 20px;
 }
+
 .navbarCart {
     position: relative;
     padding-top: 10px;
@@ -81,16 +86,23 @@
 
 .loggedIn {
     position: absolute;
+    width: 150px;
     background-color: rgb(216, 77, 77);
     visibility: hidden;
-    right: -15px;
+    right: 0;
     text-align: center;
     font-size: 2rem;
     padding: 10px;
 }
+
+.loggedIn a {
+    color: #fff;
+}
+
 .loggedIn ul {
     list-style: none;
 }
+
 .loggedIn span:hover {
     cursor: pointer;
 }
@@ -146,4 +158,78 @@
 
 .logoutConfirmBtn a {
     font-size: 1.3rem;
+}
+
+.hamburgerMenu {
+    /* position: absolute;
+    top: 17px;
+    left: 48px; */
+}
+
+.hamburgerMenu:hover {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+.sideMenu {
+    position: absolute;
+    padding: 40px;
+    font-size: 1.6rem;
+    left: 0;
+    top: 60px;
+    color: black;
+    background-color: rgb(216, 77, 77);
+    color: #fff;
+    z-index: 10;
+}
+
+.sideMenu ul {
+    list-style: none;
+}
+
+.sideMenu ul ul {
+    list-style: none;
+    padding: 5px 20px;
+    margin: 5px 10px;
+}
+
+.sideMenu ul a, .sideMenu ul ul a {
+    color: #fff;
+}
+
+.closeSideMenu {
+    animation: sideMenuAnimationClose 1s;
+    animation-fill-mode: forwards;
+}
+
+.openSideMenu {
+    animation: sideMenuAnimationOpen 1s;
+}
+
+@keyframes sideMenuAnimationOpen {
+    0% {
+        transform: translateX(-100%)
+    }
+    100% {
+        transform: translateX(0)
+    }
+}
+
+@keyframes sideMenuAnimationClose {
+    0% {
+        transform: translateX(0)
+    }
+    100% {
+        transform: translateX(-100%)
+    }
+}
+
+@media (max-width: 550px) {
+    .navbar-right{
+        display: none
+    }
+
 }

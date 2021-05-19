@@ -41,7 +41,6 @@ function Home() {
                                                 id={product.productID}
                                                 img={product.url}
                                                 title={product.title}
-                                                category={product.category}
                                                 description={product.description}
                                                 price={product.price}
                                             />

@@ -17,9 +17,6 @@ function MyOrders() {
         <>
             <Navbar />
             {loading ? <Spinner /> : error ? <h1>{error}</h1> :
-                // <div className="cartContainer">
-                //     <div className="cartItems">
-                //         <div className="cartItemsRow">
                 <div className="table-wrapper">
                     <table className="myOrdersTable">
                         <thead>
@@ -38,16 +35,12 @@ function MyOrders() {
                                     <td>{order.createdAt.slice(0,10).split('-').reverse().join('-')}</td>
                                     <td>{order.paymentMethod}</td>
                                     <td>${(order.totalPrice).toFixed(2)}</td>
-                                    <td><button><Link to={`/order/${order._id}`}>Details</Link></button></td>
+                                    <td><button class="myOrdersDetailBtn"><Link to={`/order/${order._id}`}>Details</Link></button></td>
                                 </tr>
                             })}
                         </tbody>
                     </table>
                 </div>
-
-                //         </div>
-                //     </div>
-                // </div>
             }
         </>
     )

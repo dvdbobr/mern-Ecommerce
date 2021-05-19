@@ -50,7 +50,7 @@ function Register() {
                             <span>{passwordShown ? <AiOutlineEyeInvisible onClick={togglePasswordVisiblity} /> : <AiOutlineEye onClick={togglePasswordVisiblity} />}</span>
                         </div>
                         <div className="loginFunctions">
-                            <button type="submit">Register</button>
+                            <button className="addToCartBtn" type="submit">Register</button>
                         </div>
                         <span className="loginAndRegisterAccount">Already have an account? <Link to={'/login'}>Login</Link></span>
                     </div>

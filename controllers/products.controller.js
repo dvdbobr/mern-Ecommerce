@@ -95,10 +95,10 @@ const updateProduct = async (req, res) => {
     try {
         const { productID, title, category, description, price, url, countInStock } = req.body
 
-        await productsModel.findOneAndUpdate({ productID: req.params.id }, {
+        const updatedProduct = await productsModel.findOneAndUpdate({ productID: req.params.id }, {
             productID, title, category, description, price, url, countInStock
         })
-        res.json({ message: 'product updated successfully' })
+        res.json({ updated: updatedProduct })
     }
     catch (err) {
         return res.status(500).json({ message: err.message })
@@ -111,7 +111,7 @@ const updatedCountInStock = async (req, res) => {
         const { qty } = req.body
         const product = await productsModel.findOne({ productID })
         const currentStock = product.countInStock - qty;
-        if(currentStock < 0)
+        if (currentStock < 0)
             return res.status(400).send("cant buy this many items")
         await productsModel.findOneAndUpdate({ productID }, { countInStock: currentStock })
         await product.save()

@@ -44,14 +44,14 @@ function ProductDetails() {
                                     <div className="productDetails">
                                         <h2>{selectedProduct.title}</h2>
                                         <p>{selectedProduct.description}</p>
-                                        <span>Price: ${selectedProduct.price}</span>
+                                        <span>Price: ${parseFloat(selectedProduct.price).toFixed(2)}</span>
                                         {/* <button className="buyBtn">Buy</button> */}
                                     </div>
                                     <div className="productDetailsCart">
                                         <table>
                                             <tr>
                                                 <td>Price:</td>
-                                                <td>${selectedProduct.price}</td>
+                                                <td>${parseFloat(selectedProduct.price).toFixed(2)}</td>
 
                                             </tr>
                                             <tr>
@@ -111,7 +111,6 @@ function ProductDetails() {
                                                     id={product.productID}
                                                     img={product.url}
                                                     title={product.title}
-                                                    category={product.category}
                                                     description={product.description}
                                                     price={product.price}
                                                 /> : null

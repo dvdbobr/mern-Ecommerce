@@ -53,7 +53,7 @@ function Shipment() {
                                 placeholder="Enter Country" value={user.country} onChange={onChangeHandler} />
                         </label>
                         <div className="loginFunctions">
-                            <button type="submit">Continue</button>
+                            <button className="addToCartBtn"type="submit">Continue</button>
                         </div>
                     </div>
                 </form>

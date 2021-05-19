@@ -1,14 +1,13 @@
 import React, {  useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {  useParams } from 'react-router'
+import {  useHistory, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import Navbar from '../../components/navbar/navbar.component'
 import Spinner from '../../components/spinner/spinner.component'
 import { getOrderDetails } from '../../redux/actions/orderAction';
 
 function OrderDetails() {
-    // eslint-disable-next-line
-    //const history = useHistory();
+    const history = useHistory();
     const params = useParams()
     const orderId = params.id
     const dispatch = useDispatch()
@@ -16,14 +15,19 @@ function OrderDetails() {
     //const { userInfo } = userLogin
     const orderDetails = useSelector(state => state.orderDetails)
     const { order, loading, error } = orderDetails
+
+    const myOrders=() => {
+        history.push('/user/myorders')
+    }
     useEffect(() => {
         dispatch(getOrderDetails(orderId))
-    }, [])
+    }, [dispatch,orderId])
     return (
         <>
             <Navbar />
             {loading ? <Spinner /> : error ? <h2>{error}</h2> :
                 <>
+                    <h1 className="orderCompleted">Order Completed</h1>
                     {/* <h1>Order ID: {order._id}</h1> */}
                     {order && <div className="orderContainer">
                         <div className="orderLeft">
@@ -41,8 +45,7 @@ function OrderDetails() {
                                     <>
                                         <div map={orderItem.productID} className="cartItemsRow">
                                             <span className="cartImg"><img src={orderItem.url} alt="img" /></span>
-                                            <span><Link to={`/details/${orderItem.product}`}>{orderItem.title}</Link></span>
-                                            <span className="cartPrice">${orderItem.price}</span>
+                                            <span className="cartTitle"><Link to={`/details/${orderItem.product}`}>{orderItem.title}</Link></span>
                                             <span>Qty: {orderItem.qty}</span>
                                             <span>Price: ${(orderItem.price * orderItem.qty).toFixed(2)}</span>
                                         </div>
@@ -58,6 +61,7 @@ function OrderDetails() {
                             <strong>Total Price: ${(order.totalPrice).toFixed(2)}</strong><br /><hr /><br />
                             {loading ? <Spinner /> :
                                 error && <h2>{error}</h2>}
+                                <button className="orderBtn" onClick={myOrders}>My Orders</button>
                         </div>
                     </div>}
                 </>

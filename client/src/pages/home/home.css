@@ -4,7 +4,7 @@ body {
     /* color: #fff; */
     /* background-color: #333; */
     /* background-color: #93d84d */
-    /* font-family: "coco gothic regular"; */
+    font-family: 'KoHo', sans-serif;
 }
 
 .main {
@@ -13,8 +13,9 @@ body {
     min-width: 100vh;
     height: 66vh;
     margin: 0 auto;
-    border: 2px solid;
-    /* box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; */
+    /* border: 2px solid; */
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    font-family: 'KoHo', sans-serif;
 }
 
 a {
@@ -25,4 +26,10 @@ a {
 a:hover{
     opacity: 0.6;
     transition: opacity .3s;
+}
+
+@media (max-width: 550px) {
+    .main{
+        box-shadow: none;
+    }
 }

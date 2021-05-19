@@ -17,7 +17,6 @@ function Card(props) {
         <div className="card">
             <img className="cardImg" src={props.img} alt="" />
             <h2>{props.title.split(' ').length > 3 ? props.title.split(' ').slice(0, 3).join(' ') : props.title}</h2>
-            <span>Category: {props.category}</span>
             <p>
                 {
                     props.description.length <= 35 ? props.description : <>
@@ -28,11 +27,10 @@ function Card(props) {
                 }
 
             </p>
-            <span>Price: ${props.price}</span>
+            <span>Price: ${parseFloat(props.price).toFixed(2)}</span>
             <div className="cardFunctions">
                 {/* <button className="buyBtn">Buy</button> */}
                 <button className="viewBtn" onClick={onViewClick}>View</button>
-                {/* <Link to={`/details/${props.id}`} onClick={ }>View</Link> */}
             </div>
         </div>
     )

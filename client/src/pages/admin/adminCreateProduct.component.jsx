@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import React, { useState, useEffect} from 'react'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import Navbar from '../../components/navbar/navbar.component'
@@ -15,13 +15,14 @@ function AdminCreateProduct() {
     }
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
-    const config = {
-        headers: {
-            Authorization: `${userInfo.token}`
-        }
-    }
+    
     const createProductHandler = async (e) => {
         e.preventDefault()
+        const config = {
+            headers: {
+                Authorization: `${userInfo.token}`
+            }
+        }
         console.log(newProduct);
         try {
             await axios.post('/api/products', {
@@ -40,6 +41,11 @@ function AdminCreateProduct() {
             alert(err.response.data.message);
         }
     }
+    useEffect(() => {
+        if (!userInfo || userInfo.user.role !== 1)
+            history.push(`/`)
+
+    }, [history])
     return (
         <>
             <Navbar />
@@ -61,7 +67,7 @@ function AdminCreateProduct() {
                         <input type="number" name="countInStock" required
                             placeholder="Enter count in Stock" value={newProduct.countInStock} onChange={onChangeHandler} />
                         <div className="loginFunctions">
-                            <button type="submit">Create Product</button>
+                            <button className="addToCartBtn" type="submit">Create Product</button>
                         </div>
                     </div>
                 </form>

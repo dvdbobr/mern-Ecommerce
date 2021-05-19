@@ -35,37 +35,40 @@ function Cart(props) {
     return (
         <>
             <Navbar />
-            {!cartItems? <Spinner/>: <div className="cartContainer">
+            {!cartItems ? <Spinner /> : <div className="cartContainer">
                 {cartItems.length > 0 ?
                     <>
                         <div className="cartItems">
+                            <h1>Your Shopping Cart</h1>
                             {cartItems.map(cartItem => {
-                                return <div className="cartItemsRow">
-                                    <div className="cartImg"><img src={cartItem.url} alt="img" /></div>
-                                    <div><Link to={`/details/${cartItem.product}`}>{cartItem.title}</Link></div>
-                                    <div className="cartSelect">
-                                        <select value={cartItem.qty} onChange={e => dispatch(addToCart(cartItem.product, Number(e.target.value)))}>
-                                            {[...Array(cartItem.countInStock).keys()].map(x => (
-                                                <option key={x + 1} value={x + 1}>{x + 1}</option>
-                                            ))}
-                                        </select>
-                                    </div>
-                                    <div className="cartPrice">${cartItem.price}</div>
-                                    <div className="removeFromCart">
-                                        <button onClick={() => removeFromCartHandler(cartItem.product)}>DELETE</button>
-                                    </div>
-                                </div>
+                                return <>
+                                    <div className="cartItemsRow">
+                                        <div className="cartImg"><img src={cartItem.url} alt="img" /></div>
+                                        <div className="cartTitle"><Link to={`/details/${cartItem.product}`}>{cartItem.title}</Link></div>
+                                        <div className="cartSelect">
+                                            <select value={cartItem.qty} onChange={e => dispatch(addToCart(cartItem.product, Number(e.target.value)))}>
+                                                {[...Array(cartItem.countInStock).keys()].map(x => (
+                                                    <option key={x + 1} value={x + 1}>{x + 1}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="cartPrice">${parseFloat(cartItem.price).toFixed(2)}</div>
+                                        <div className="removeFromCart">
+                                            <button onClick={() => removeFromCartHandler(cartItem.product)}>DELETE</button>
+                                        </div>
+                                    </div><hr /><br />
+                                </>
                             })
                             }
                         </div>
                         <div className="cartTotal">
-                            Subtotal: ({cartItems.reduce((a, b) => a + b.qty, 0)} items):{cartItems.reduce((a, b) => a + b.qty * b.price, 0)}
+                            Subtotal: ({cartItems.reduce((a, b) => a + b.qty, 0)} items): ${parseFloat(cartItems.reduce((a, b) => a + b.qty * b.price, 0)).toFixed(2)}
                             {
                                 <button className="cartCheckout"
                                     disabled={cartItems.length === 0}
                                     onClick={checkOutHandler}
                                 >Proceed To Checkout
-                        </button>
+                                </button>
                             }
                         </div>
                     </>

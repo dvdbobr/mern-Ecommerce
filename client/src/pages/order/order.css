@@ -1,7 +1,7 @@
 .orderContainer {
-    margin: 4rem 20vw;
+    margin: 2rem 15vw;
     height: 500px;
-    width: 60vw;
+    width: 70vw;
     font-size: 1.3rem;
     display: flex;
     justify-content: space-between;
@@ -17,6 +17,7 @@
 }
 
 .orderRight {
+    background-color: rgba(128, 128, 128, 0.15);
     border: 2px solid;
     border-radius: 10px;
     height: 400px;
@@ -25,13 +26,28 @@
     margin-left: 6rem;
 }
 
-.orderRight button {
-    height: 50px;
-    font-size: 1.2rem
+.orderBtn{
+    height: 60px;
+    padding: 10px;
+    font-size: 1.3rem;
+    background-color: #4dd8d8;
+    color: #fff;
+    font-weight: bold;
+    border: 1px transparent;
+    border-radius: 55px;
 }
 
 .orderRight button:hover {
     cursor: pointer;
+}
+.orderCompleted{
+    text-align: center;
+    font-size: 3rem;
+    color:#4CAF50;
+}
+
+.myOrdersDetailBtn{
+    padding:10px
 }
 
 /* myOrders */
@@ -63,12 +79,6 @@
     background: #4FC3A1;
 }
 
-/* .myOrdersTable thead th:nth-child(odd) {
-    color: #ffffff;
-    background: #324960;
-} */
-
-
 .myOrdersTable th {
     padding-top: 12px;
     padding-bottom: 12px;
@@ -76,111 +86,5 @@
     color: white;
 }
 
-/* 
-.table-wrapper {
-    margin: 10px 70px 70px;
-    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2);
-}
 
-.myOrdersTable {
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: normal;
-    border: none;
-    border-collapse: collapse;
-    width: 80%;
-    max-width: 80%;
-    white-space: nowrap;
-    background-color: white;
-}
-
-.myOrdersTable td, .myOrdersTable th {
-    text-align: center;
-    padding: 8px;
-}
-
-.myOrdersTable td {
-    border-right: 1px solid #f8f8f8;
-    font-size: 12px;
-}
-
-.myOrdersTable thead th {
-    color: #ffffff;
-    background: #4FC3A1;
-}
-
-.myOrdersTable thead th:nth-child(odd) {
-    color: #ffffff;
-    background: #324960;
-}
-
-.myOrdersTable tr:nth-child(even) {
-    background: #F8F8F8;
-}
-
-/* Responsive */
-
-/* @media (max-width: 767px) {
-    .myOrdersTable {
-        display: block;
-        width: 100%;
-    }
-    .table-wrapper:before {
-        content: "Scroll horizontally >";
-        display: block;
-        text-align: right;
-        font-size: 11px;
-        color: white;
-        padding: 0 0 10px;
-    }
-    .myOrdersTable thead, .myOrdersTable tbody, .myOrdersTable thead th {
-        display: block;
-    }
-    .myOrdersTable thead th:last-child {
-        border-bottom: none;
-    }
-    .myOrdersTable thead {
-        float: left;
-    }
-    .myOrdersTable tbody {
-        width: auto;
-        position: relative;
-        overflow-x: auto;
-    }
-    .myOrdersTable td, .myOrdersTable th {
-        padding: 20px .625em .625em .625em;
-        height: 60px;
-        vertical-align: middle;
-        box-sizing: border-box;
-        overflow-x: hidden;
-        overflow-y: auto;
-        width: 120px;
-        font-size: 13px;
-        text-overflow: ellipsis;
-    }
-    .myOrdersTable thead th {
-        text-align: left;
-        border-bottom: 1px solid #f7f7f9;
-    }
-    .myOrdersTable tbody tr {
-        display: table-cell;
-    }
-    .myOrdersTable tbody tr:nth-child(odd) {
-        background: none;
-    }
-    .myOrdersTable tr:nth-child(even) {
-        background: transparent;
-    }
-    .myOrdersTable tr td:nth-child(odd) {
-        background: #F8F8F8;
-        border-right: 1px solid #E6E4E4;
-    }
-    .myOrdersTable tr td:nth-child(even) {
-        border-right: 1px solid #E6E4E4;
-    }
-    .myOrdersTable tbody td {
-        display: block;
-        text-align: center;
-    }
-} */
 
