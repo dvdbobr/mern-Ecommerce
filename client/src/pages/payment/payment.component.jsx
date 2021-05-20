@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import CheckOutBreadCrumbs from '../../components/checkoutBreadCrumbs/checkoutBreadCrumbs.component'
 import Navbar from '../../components/navbar/navbar.component'
@@ -8,8 +8,9 @@ import { savePaymentMethod } from '../../redux/actions/cartAction'
 function Payment() {
     const dispatch = useDispatch()
     const history = useHistory();
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
     const [paymentMethod, setPaymentMethod] = useState('')
-
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(savePaymentMethod(paymentMethod))
@@ -18,7 +19,11 @@ function Payment() {
     const onChangeHandler = (e) => {
         setPaymentMethod(e.target.value)
     }
+    useEffect(() => {
+        if (!userInfo)
+            history.push('/login')
 
+    }, [history, userInfo])
     return (
         <>
             <Navbar />
@@ -29,7 +34,7 @@ function Payment() {
                     <div className="paymentMethodForm">
                         <div className="inputPayment">
                             <input type="radio" name="paymentMethod"
-                                value={'paypal'} onChange={onChangeHandler} required/>
+                                value={'paypal'} onChange={onChangeHandler} required />
                             <label>Paypal</label>
                         </div>
                         <div className="inputPayment">

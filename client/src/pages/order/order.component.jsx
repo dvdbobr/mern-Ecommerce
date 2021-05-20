@@ -9,7 +9,7 @@ import { deleteShippingAddress, removeAllFromCart } from '../../redux/actions/ca
 import { makeOrder } from '../../redux/actions/orderAction'
 
 function Order() {
-    
+
     const history = useHistory();
     const dispatch = useDispatch()
     const [totalPrice, setTotalPrice] = useState(0)
@@ -47,6 +47,12 @@ function Order() {
         dispatch(deleteShippingAddress())
     }
     useEffect(() => {
+        if (!userInfo)
+            history.push('/login')
+
+    }, [history, userInfo])
+    useEffect(() => {
+
         calculateItemsTotalPrice()
         calculateTotalTax()
         calculateTotalPrice()

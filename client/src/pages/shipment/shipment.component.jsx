@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import Navbar from '../../components/navbar/navbar.component'
@@ -8,6 +8,8 @@ import CheckOutBreadCrumbs from '../../components/checkoutBreadCrumbs/checkoutBr
 function Shipment() {
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
     const [user, setUser] = useState({
         address: shippingAddress.address,
         city: shippingAddress.city,
@@ -25,6 +27,11 @@ function Shipment() {
         dispatch(saveShippingAddress({ ...user }))
         history.push('/payment')
     }
+    useEffect(() => {
+        if(!userInfo)
+            history.push('/login')
+
+    }, [history,userInfo])
     return (
         <>
             <Navbar />

@@ -16,7 +16,7 @@ const getPaginatedProducts = async (req, res) => {
     //const limit = parseInt(req.query.limit)
     // const startIndex = (page - 1) * limit
     // const endIndex = page * limit
-    const pageLimit = 4;
+    const pageLimit = 8;
     const page = parseInt(req.query.page) || 1  // 1 if not included
 
     try {
